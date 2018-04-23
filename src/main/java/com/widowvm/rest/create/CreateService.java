@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.Runtime;
 
 @Service
@@ -21,10 +22,19 @@ public class CreateService {
         String sshString = "ssh jenkins@markov '";
         try {
             Process process = runtime.exec(sshString + script + "'");
+            process.waitFor();
+
+            java.io.InputStream is = process.getInputStream();
+            java.io.BufferedReader reader = new java.io.BufferedReader(new InputStreamReader(is));
+            String s = null;
+            while ((s = reader.readLine()) != null) {
+                System.out.println(s);
+            }
+            is.close();
             return new CreateResponse(createRequest.getName(),200);
         }
 
-        catch(IOException exception){
+        catch(Exception exception){
             return new CreateResponse(createRequest.getName(),400);
         }
 
