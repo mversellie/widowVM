@@ -1,0 +1,1 @@
+virt-install -n $name --vcpus=$vCpus -r $memory --os-type=linux --disk /home/jenkins/images/jenkins_dev.img,device=disk,bus=virtio -w   bridge=br1,model=virtio --vnc --noautoconsole --import

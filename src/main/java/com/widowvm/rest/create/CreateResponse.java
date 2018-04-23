@@ -2,18 +2,15 @@ package com.widowvm.rest.create;
 
 public class CreateResponse {
     private String name;
-    private Integer vCpus;
-    private Integer size;
-    private Integer memory;
+    private Integer status;
 
     public CreateResponse() {
+
     }
 
-    public CreateResponse(String name, Integer size, Integer memory, Integer vCpu) {
+    public CreateResponse(String name,Integer status ) {
         this.name = name;
-        this.vCpus = vCpus;
-        this.size = size;
-        this.memory = memory;
+        this.status = status;
     }
 
     public String getname() {
@@ -24,27 +21,11 @@ public class CreateResponse {
         this.name = name;
     }
 
-    public Integer getvCpus() {
-        return vCpus;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setvCpus(Integer vCpus) {
-        this.vCpus = vCpus;
-    }
-
-    public Integer getSize() {
-        return size;
-    }
-
-    public void setSize(Integer size) {
-        this.size = size;
-    }
-
-    public Integer getMemory() {
-        return memory;
-    }
-
-    public void setMemory(Integer memory) {
-        this.memory = memory;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

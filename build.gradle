@@ -28,6 +28,7 @@ repositories {
 
 
 dependencies {
+	compile group: 'org.apache.velocity', name: 'velocity', version: '1.7'
 	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile('org.springframework.boot:spring-boot-starter-cache')
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
