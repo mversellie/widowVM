@@ -26,7 +26,7 @@ public class CreateScriptGeneratorTest {
     @Test
     public void doesGenerateScriptReturnCorrectCommand(){
         CreateRequest createRequest = new CreateRequest("myVM",20,34,2);
-        String correctString = "virt-install -n myVM --vcpus=2 -r 34 --os-type=linux --disk /home/jenkins/images/jenkins_dev.img,device=disk,bus=virtio -w   bridge=br1,model=virtio --vnc --noautoconsole --import";
+        String correctString = "sh 'virt-install -n myVM --vcpus=2 -r 34 --os-type=linux --disk /home/jenkins/images/jenkins_dev.img,device=disk,bus=virtio -w   bridge=br1,model=virtio --vnc --noautoconsole --import'";
         CreateScriptGenerator createScriptGenerator = new CreateScriptGenerator(createRequest);
         assertEquals(correctString,createScriptGenerator.generateScript());
     }

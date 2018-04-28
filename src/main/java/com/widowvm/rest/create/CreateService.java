@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.Runtime;
 
@@ -18,23 +20,38 @@ public class CreateService {
     public static CreateResponse createVm(CreateRequest createRequest) {
         CreateScriptGenerator createScriptGenerator = new CreateScriptGenerator(createRequest);
         String script = createScriptGenerator.generateScript();
-        Runtime runtime = Runtime.getRuntime();
+
+        ProcessBuilder processBuilder = new ProcessBuilder("sh","-c",script);
+        processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+        processBuilder.redirectError(ProcessBuilder.Redirect.INHERIT);
+
+       // Runtime runtime = Runtime.getRuntime();
 
         try {
+            Process createKvm = processBuilder.start();
+            /**
             Process process = runtime.exec(script );
-            process.waitFor();
+            InputStream stdout =  process.getInputStream();
+            InputStream stdError = process.getErrorStream();
 
-            java.io.InputStream is = process.getInputStream();
-            java.io.BufferedReader reader = new java.io.BufferedReader(new InputStreamReader(is));
+
+
+            BufferedReader errorRreader =
+                    new BufferedReader(
+                            new InputStreamReader(process.getErrorStream()));
             String s = null;
-            while ((s = reader.readLine()) != null) {
+            while ((s = errorRreader.readLine()) != null) {
                 System.out.println(s);
             }
-            is.close();
+
+            int badStuff = process.waitFor();
+            System.out.println(badStuff);
+             **/
             return new CreateResponse(createRequest.getName(),200);
         }
 
         catch(Exception exception){
+            exception.printStackTrace();
             return new CreateResponse(createRequest.getName(),400);
         }
 

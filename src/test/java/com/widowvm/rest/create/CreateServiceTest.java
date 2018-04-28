@@ -9,9 +9,9 @@ public class CreateServiceTest {
     @Test
     public void isVmCorrectlyCreated() {
         CreateResponse correctResponse = new CreateResponse("myVm",200);
-        CreateRequest testRequest = new CreateRequest("myVm",1,1024,1);
+        CreateRequest testRequest = new CreateRequest("myVm",1,10240,1);
         CreateResponse testResponse = CreateService.createVm(testRequest);
         assertEquals(correctResponse.getname(),testResponse.getname());
-        assertEquals(correctResponse.getStatus(),correctResponse.getStatus());
+        assertEquals(correctResponse.getStatus(),testResponse.getStatus());
     }
 }
