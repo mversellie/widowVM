@@ -38,6 +38,7 @@ public class CreateScriptGenerator {
         StringWriter output = new StringWriter();
 
         script.merge(velocityContext,output);
+        System.out.println("**********************************" + output.toString());
         return output.toString();
     }
 
