@@ -19,9 +19,9 @@ public class CreateService {
         CreateScriptGenerator createScriptGenerator = new CreateScriptGenerator(createRequest);
         String script = createScriptGenerator.generateScript();
         Runtime runtime = Runtime.getRuntime();
-        String sshString = "ssh jenkins@markov '";
+
         try {
-            Process process = runtime.exec(sshString + script + "'");
+            Process process = runtime.exec(script );
             process.waitFor();
 
             java.io.InputStream is = process.getInputStream();
