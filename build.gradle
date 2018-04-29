@@ -47,7 +47,6 @@ dependencies {
 }
 
 clean.doLast {
-	systemProperty 'ignoreFailures', true
 	exec {
 		commandLine 'virsh', 'destroy', '"myVm"'
 		commandLine  'virsh', 'undefine', '"myVm"'
