@@ -48,7 +48,7 @@ dependencies {
 
 clean.doLast {
 	exec {
-		commandLine 'virsh', 'destroy', '"myVm"'
-		commandLine  'virsh', 'undefine', '"myVm"'
+		commandLine 'virsh', 'destroy', 'myVm'
+		commandLine  'virsh', 'undefine', 'myVm'
 	}
 }
