@@ -1,1 +1,1 @@
-virt-install -n $name --vcpus=$vCpus -r $memory --os-type=linux --disk /home/jenkins/images/jenkins_dev.img,device=disk,bus=virtio -w   bridge=br1,model=virtio --vnc --noautoconsole --import
+virt-install --name '$name' --ram $memory --disk path=/var/lib/libvirt/images/$name,size=$size --vcpus $vCpus --os-type linux --os-variant generic --network bridge=virbr0 --graphics none --console pty,target_type=serial --location 'http://ftp.nl.debian.org/debian/dists/jessie/main/installer-amd64/' --extra-args 'console=ttyS0'

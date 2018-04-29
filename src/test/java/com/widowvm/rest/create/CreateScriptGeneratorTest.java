@@ -25,8 +25,8 @@ public class CreateScriptGeneratorTest {
 
     @Test
     public void doesGenerateScriptReturnCorrectCommand(){
-        CreateRequest createRequest = new CreateRequest("myVM",20,34,2);
-        String correctString = "sh 'virt-install -n myVM --vcpus=2 -r 34 --os-type=linux --disk /home/jenkins/images/jenkins_dev.img,device=disk,bus=virtio -w   bridge=br1,model=virtio --vnc --noautoconsole --import'";
+        CreateRequest createRequest = new CreateRequest("myVM",20,2048,2);
+        String correctString = "virt-install --name 'myVM' --ram 2048 --disk path=/var/lib/libvirt/images/myVM,size=20 --vcpus 2 --os-type linux --os-variant generic --network bridge=virbr0 --graphics none --console pty,target_type=serial --location 'http://ftp.nl.debian.org/debian/dists/jessie/main/installer-amd64/' --extra-args 'console=ttyS0'";
         CreateScriptGenerator createScriptGenerator = new CreateScriptGenerator(createRequest);
         assertEquals(correctString,createScriptGenerator.generateScript());
     }

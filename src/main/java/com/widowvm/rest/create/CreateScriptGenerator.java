@@ -26,19 +26,17 @@ public class CreateScriptGenerator {
         velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         velocityEngine.init();
 
-
-
         Template script = velocityEngine.getTemplate("templates/Create.vm");
 
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("vCpus",createRequest.getvCpus());
         velocityContext.put("memory",createRequest.getMemory());
         velocityContext.put("name",createRequest.getName());
+        velocityContext.put("size",createRequest.getSize());
 
         StringWriter output = new StringWriter();
 
         script.merge(velocityContext,output);
-        System.out.println("**********************************" + output.toString());
         return output.toString();
     }
 

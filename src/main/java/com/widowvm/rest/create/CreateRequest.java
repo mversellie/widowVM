@@ -8,7 +8,7 @@ public class CreateRequest {
     private final Integer memory;
     private final Integer vCpus;
 
-    public  CreateRequest(){
+    public CreateRequest(){
         this.name = "";
         this.size = 0;
         this.memory = 0;
