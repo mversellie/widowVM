@@ -48,9 +48,11 @@ dependencies {
 
 clean.doLast {
 	exec {
+		ignoreExitValue = true
 		commandLine 'virsh', 'destroy', 'myVm'
 	}
 	exec{
+		ignoreExitValue = true
 		commandLine 'virsh', 'undefine', 'myVm'
 	}
 }
