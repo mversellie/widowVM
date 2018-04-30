@@ -6,6 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.widowvm.rest.create.*;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -24,10 +27,12 @@ public class CreateScriptGeneratorTest {
     }
 
     @Test
-    public void doesGenerateScriptReturnCorrectCommand(){
+    public void doesGenerateScriptReturnCorrectCommand() throws Exception{
+        String validJsonLocation = System.getProperty("user.dir") +"/src/test/resources/validCreateScript.sh";
         CreateRequest createRequest = new CreateRequest("myVM",20,2048,1);
-        String correctString = "virt-install --name 'myVM' --ram 2048 --disk path=/var/lib/libvirt/images/myVM,size=20 --vcpus 1 --os-type linux --os-variant ubuntuprecise --network bridge=virbr0 --graphics none --console pty,target_type=serial --location 'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/' --extra-args 'console=ttyS0'";
+        String correctScript = new String (Files.readAllBytes(Paths.get(validJsonLocation)));
+        System.out.println(correctScript);
         CreateScriptGenerator createScriptGenerator = new CreateScriptGenerator(createRequest);
-        assertEquals(correctString,createScriptGenerator.generateScript());
+        assertEquals(correctScript,createScriptGenerator.generateScript());
     }
 }
