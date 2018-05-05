@@ -6,6 +6,12 @@ import org.springframework.stereotype.Service;
 public class CreateService {
 
     public static CreateResponse createVm(CreateRequest createRequest) {
+        CreateRequestValidator requestValidator = new CreateRequestValidator(createRequest);
+
+        if(!requestValidator.isRequestValid()){
+            return new CreateResponse(createRequest.getName(),400);
+        }
+
         CreateScriptGenerator createScriptGenerator = new CreateScriptGenerator(createRequest);
         String script = createScriptGenerator.generateScript();
 

@@ -1,0 +1,15 @@
+Id:             2
+Name:           Test
+UUID:           f499cf43-0180-f406-4056-a21ac0cf296b
+OS Type:        hvm
+State:          running
+CPU(s):         4
+CPU time:       29.3s
+Max memory:     8240128 KiB
+Used memory:    8240000 KiB
+Persistent:     yes
+Autostart:      enable
+Managed save:   no
+Security model: apparmor
+Security DOI:   0
+Security label: libvirt-f499cf43-0180-f406-4056-a21ac0cf296b (enforcing)

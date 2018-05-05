@@ -9,6 +9,8 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import java.io.StringWriter;
 
 public class CreateScriptGenerator {
+
+
     private CreateRequest createRequest;
 
     public CreateScriptGenerator(CreateRequest arg){
