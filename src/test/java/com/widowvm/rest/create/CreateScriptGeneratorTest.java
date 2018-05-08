@@ -21,7 +21,7 @@ public class CreateScriptGeneratorTest {
     @Test
     public void doesGenerateScriptReturnAString() {
         CreateScriptGenerator createScriptGenerator = new CreateScriptGenerator(new CreateRequest("myVM",20,34,2));
-        assert(createScriptGenerator.generateScript() instanceof String);
+        assert(createScriptGenerator.getScript() instanceof String);
     }
 
     @Test
@@ -29,8 +29,7 @@ public class CreateScriptGeneratorTest {
         String validJsonLocation = System.getProperty("user.dir") +"/src/test/resources/validCreateScript.sh";
         CreateRequest createRequest = new CreateRequest("myVM",20,2048,1);
         String correctScript = new String (Files.readAllBytes(Paths.get(validJsonLocation)));
-        System.out.println(correctScript);
         CreateScriptGenerator createScriptGenerator = new CreateScriptGenerator(createRequest);
-        assertEquals(correctScript,createScriptGenerator.generateScript());
+        assertEquals(correctScript,createScriptGenerator.getScript());
     }
 }

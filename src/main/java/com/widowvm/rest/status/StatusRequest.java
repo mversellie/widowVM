@@ -1,13 +1,19 @@
 package com.widowvm.rest.status;
 
 public class StatusRequest {
-    private String vmName;
+    private String name;
 
-    public String getVmName() {
-        return vmName;
+    public StatusRequest(String name){
+        this.name = name;
     }
 
-    public void setVmName(String vmName) {
-        this.vmName = vmName;
+    public StatusRequest(){}
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

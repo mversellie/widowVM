@@ -1,6 +1,5 @@
 package com.widowvm.rest.create;
 
-import org.springframework.data.repository.core.support.SurroundingTransactionDetectorMethodInterceptor;
 
 public class CreateRequest {
     private final String name;

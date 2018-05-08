@@ -13,7 +13,7 @@ public class AttributeResponseFormatterTest {
         VirshOutputParser virshParser = new VirshOutputParser(VirshOutputMother.getAVirshOuput());
         formatter = new AttributeResponseFormatter(virshParser.getAttributeMap());
         actualResponse = formatter.getResponse();
-        generateExpectedResponse();
+        expectedResponse = StatusExpectedResponseMother.generateExpectedResponse();
     }
 
     @Test
@@ -39,14 +39,6 @@ public class AttributeResponseFormatterTest {
     @Test
     public void isRunning() {
         assert(expectedResponse.isRunning() == actualResponse.isRunning());
-    }
-
-    public void generateExpectedResponse(){
-        expectedResponse = new StatusResponse();
-        expectedResponse.setMemory(8240);
-        expectedResponse.setvCpus(4);
-        expectedResponse.setName("Test");
-        expectedResponse.setRunning(true);
     }
 
 }

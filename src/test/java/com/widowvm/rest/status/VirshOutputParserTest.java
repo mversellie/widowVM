@@ -16,6 +16,5 @@ public class VirshOutputParserTest {
     @Test
     public void returnsAMapOfValuesWithAtLeastOneEntry() {
         assert(!parser.getAttributeMap().isEmpty());
-        System.out.println(parser.getAttributeMap().toString());
     }
 }

@@ -1,4 +1,4 @@
-package com.widowvm.rest.create;
+package com.widowvm.rest.status;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -8,18 +8,16 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 import java.io.StringWriter;
 
-public class CreateScriptGenerator {
+public class StatusScriptGenerator {
 
+    private StatusRequest statusRequest;
 
-    private CreateRequest createRequest;
+    private String script = "";
 
-    private String script;
-
-    public CreateScriptGenerator(CreateRequest arg){
-        createRequest = arg;
+    public StatusScriptGenerator(StatusRequest request) {
+        statusRequest = request;
         generateScript();
     }
-
 
     public void generateScript(){
         VelocityEngine velocityEngine = new VelocityEngine();
@@ -27,13 +25,10 @@ public class CreateScriptGenerator {
         velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         velocityEngine.init();
 
-        Template scriptTemplate = velocityEngine.getTemplate("templates/Create.vm");
+        Template scriptTemplate = velocityEngine.getTemplate("templates/Status.vm");
 
         VelocityContext velocityContext = new VelocityContext();
-        velocityContext.put("vCpus",createRequest.getvCpus());
-        velocityContext.put("memory",createRequest.getMemory());
-        velocityContext.put("name",createRequest.getName());
-        velocityContext.put("size",createRequest.getSize());
+        velocityContext.put("vmName",statusRequest.getName());
 
         StringWriter output = new StringWriter();
 
@@ -41,7 +36,6 @@ public class CreateScriptGenerator {
 
         script = output.toString();
     }
-
 
     public String getScript() {
         return script;

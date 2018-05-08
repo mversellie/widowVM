@@ -14,9 +14,12 @@ public class CreateServiceTest {
     @Test
     public void isVmCorrectlyCreated() {
         CreateResponse correctResponse = new CreateResponse("myVm",200);
-        CreateRequest testRequest = new CreateRequest("myVm",1,2000,1);
-        CreateResponse testResponse = CreateService.createVm(testRequest);
+        CreateRequest testRequestBeforeCreate = new CreateRequest("myVm",10,2000,1);
+        CreateResponse testResponse = CreateService.createVm(testRequestBeforeCreate);
         assertEquals(correctResponse.getname(),testResponse.getname());
         assertEquals(correctResponse.getStatus(),testResponse.getStatus());
+        CreateResponse testResponseAfterCreation = CreateService.createVm(testRequestBeforeCreate);
+        assertEquals(400,testResponseAfterCreation.getStatus().intValue());
+
     }
 }

@@ -2,6 +2,9 @@ package com.widowvm.rest;
 
 import com.widowvm.rest.create.CreateRequest;
 import com.widowvm.rest.create.CreateResponse;
+import com.widowvm.rest.status.StatusExpectedResponseMother;
+import com.widowvm.rest.status.StatusRequest;
+import com.widowvm.rest.status.StatusResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,13 +14,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -45,7 +47,7 @@ public class WidowVmControllerTest {
     @Test
     public void createVmWithValidRequest() throws Exception {
         CreateResponse expectedResponse = new CreateResponse("myVm",200);
-        given(widowVmController.createResponse(any(CreateRequest.class))).willReturn(expectedResponse);
+        given(widowVmController.createVm(any(CreateRequest.class))).willReturn(expectedResponse);
             mockMvc.perform(post("/create")
                     .contentType(APPLICATION_JSON)
                     .content("{\"size\":2000,\"memory\":2048,\"name\":\"myVm\",\"vCpus\":1}"))
@@ -57,12 +59,24 @@ public class WidowVmControllerTest {
     @Test
     public void createVmWithInvalidRequest() throws Exception {
         CreateResponse expectedResponse = new CreateResponse("myVm",400);
-        given(widowVmController.createResponse(any(CreateRequest.class))).willReturn(expectedResponse);
+        given(widowVmController.createVm(any(CreateRequest.class))).willReturn(expectedResponse);
         mockMvc.perform(post("/create")
                 .contentType(APPLICATION_JSON)
                 .content("{\"memory\":2048,\"name\":\"myVm\",\"vCpus\":1}"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().json("{\"name\":\"myVm\",\"status\":400}"));
+    }
+
+    @Test
+    public void statusVmWithValidRequest() throws Exception{
+        StatusResponse expectedResponse = StatusExpectedResponseMother.generateExpectedResponse();
+        given(widowVmController.getVmStatus(any(StatusRequest.class))).willReturn(expectedResponse);
+        mockMvc.perform(post("/status")
+                .contentType(APPLICATION_JSON)
+                .content("\"name\":\"status_test\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().json(StatusExpectedResponseMother.stringifiedResponse()));
     }
 }

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.HashMap;
+import java.util.Map;
 
 public class VirshOutputParser {
 
@@ -15,7 +16,11 @@ public class VirshOutputParser {
         String currentLine = reader.readLine();
 
         while(currentLine != null){
-            String keyAndValue[] =  currentLine.split("\\:");
+            String[] keyAndValue =  currentLine.split("\\:");
+            if(keyAndValue.length < 2){
+                currentLine = reader.readLine();
+                continue;
+            }
             String key = keyAndValue[0];
             String value = formatValue(keyAndValue[1]);
 
@@ -26,12 +31,12 @@ public class VirshOutputParser {
 
     }
 
-    public HashMap<String,String> getAttributeMap() {
+    public Map<String,String> getAttributeMap() {
         return attributeMap;
     }
 
     public String formatValue(String unformattedValue){
-        String valueSplitOnWhiteSpace[] = unformattedValue.split("\\s");
+        String[] valueSplitOnWhiteSpace = unformattedValue.split("\\s");
         StringBuilder value = new StringBuilder("");
 
         for(String valueSection:valueSplitOnWhiteSpace){

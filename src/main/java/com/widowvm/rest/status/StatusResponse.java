@@ -1,6 +1,5 @@
 package com.widowvm.rest.status;
 
-import sun.font.CoreMetrics;
 
 public class StatusResponse {
     private Integer memory = 0;

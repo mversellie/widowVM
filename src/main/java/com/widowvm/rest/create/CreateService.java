@@ -13,7 +13,7 @@ public class CreateService {
         }
 
         CreateScriptGenerator createScriptGenerator = new CreateScriptGenerator(createRequest);
-        String script = createScriptGenerator.generateScript();
+        String script = createScriptGenerator.getScript();
 
         ProcessBuilder processBuilder = new ProcessBuilder("sh","-c",script);
         processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
@@ -22,7 +22,9 @@ public class CreateService {
         try {
             Process createKvm = processBuilder.start();
             createKvm.waitFor();
-            return new CreateResponse(createRequest.getName(),200);
+            Integer exitCode = createKvm.exitValue();
+            Integer statusCode = exitCode == 0 ? 200 : 400;
+            return new CreateResponse(createRequest.getName(),statusCode);
         }
 
         catch(Exception exception){

@@ -1,1 +1,12 @@
-virt-install --name 'myVM' --ram 2048 --disk path=/var/lib/libvirt/images/myVM,size=20 --vcpus 1 --os-type linux --os-variant ubuntuprecise --network bridge=virbr0 --graphics none --console pty,target_type=serial --location 'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/' --extra-args 'console=ttyS0'
+virt-install \
+--name 'myVM' \
+--ram 2048 \
+--disk path=/var/lib/libvirt/images/myVM,size=20 \
+--vcpus 1 \
+--os-type linux \
+--os-variant ubuntuprecise \
+--network bridge=virbr0 \
+--graphics none \
+--console pty,target_type=serial \
+--location 'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/' \
+--extra-args 'console=ttyS0'
