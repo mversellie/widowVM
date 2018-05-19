@@ -12,8 +12,7 @@ public class CreateService {
             return new CreateResponse(createRequest.getName(),400);
         }
 
-        CreateScriptGenerator createScriptGenerator = new CreateScriptGenerator(createRequest);
-        String script = createScriptGenerator.getScript();
+         String script = CreateScriptGenerator.generateScript(createRequest);
 
         ProcessBuilder processBuilder = new ProcessBuilder("sh","-c",script);
         processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT);

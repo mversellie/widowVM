@@ -10,16 +10,7 @@ import java.io.StringWriter;
 
 public class StatusScriptGenerator {
 
-    private StatusRequest statusRequest;
-
-    private String script = "";
-
-    public StatusScriptGenerator(StatusRequest request) {
-        statusRequest = request;
-        generateScript();
-    }
-
-    public void generateScript(){
+    public static String generateScript(StatusRequest statusRequest){
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
         velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
@@ -34,10 +25,7 @@ public class StatusScriptGenerator {
 
         scriptTemplate.merge(velocityContext,output);
 
-        script = output.toString();
+        return output.toString();
     }
 
-    public String getScript() {
-        return script;
-    }
 }

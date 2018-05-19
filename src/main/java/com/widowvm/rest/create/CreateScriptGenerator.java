@@ -11,17 +11,7 @@ import java.io.StringWriter;
 public class CreateScriptGenerator {
 
 
-    private CreateRequest createRequest;
-
-    private String script;
-
-    public CreateScriptGenerator(CreateRequest arg){
-        createRequest = arg;
-        generateScript();
-    }
-
-
-    public void generateScript(){
+    public static String generateScript(CreateRequest createRequest){
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
         velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
@@ -39,11 +29,7 @@ public class CreateScriptGenerator {
 
         scriptTemplate.merge(velocityContext,output);
 
-        script = output.toString();
+        return output.toString();
     }
 
-
-    public String getScript() {
-        return script;
-    }
 }

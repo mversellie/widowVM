@@ -16,11 +16,10 @@ public class StatusScriptGeneratorTest {
     @Before
     public void setUp() throws Exception {
         request = new StatusRequest(TEST_VM_NAME);
-        scriptGen = new StatusScriptGenerator(request);
     }
 
     @Test
     public void doesScriptMatch() {
-        assert(scriptGen.getScript().equals(EXPECTED_SCRIPT));
+        assert(StatusScriptGenerator.generateScript(request).equals(EXPECTED_SCRIPT));
     }
 }

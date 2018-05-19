@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 public class StatusService {
 
     public static StatusResponse getVmStatus(StatusRequest statusRequest) {
-StatusScriptGenerator statusScriptGenerator = new StatusScriptGenerator(statusRequest);
-        String script = statusScriptGenerator.getScript();
+        String script = StatusScriptGenerator.generateScript(statusRequest);
 
         ProcessBuilder processBuilder = new ProcessBuilder("sh","-c",script);
 
