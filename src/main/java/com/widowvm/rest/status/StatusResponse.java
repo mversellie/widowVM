@@ -1,11 +1,16 @@
 package com.widowvm.rest.status;
 
 
-public class StatusResponse {
+import com.widowvm.rest.interfaces.Response;
+
+public class StatusResponse extends Response{
     private Integer memory = 0;
     private Integer vCpus = 0;
-    private String name = "";
     private boolean isRunning = false;
+
+    public StatusResponse(){
+        super("");
+    }
 
     public boolean isRunning() {
         return isRunning;
@@ -30,13 +35,5 @@ public class StatusResponse {
 
     public void setvCpus(Integer vCpus) {
         this.vCpus = vCpus;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

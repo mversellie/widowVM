@@ -1,28 +1,25 @@
 package com.widowvm.rest.create;
 
 
-public class CreateRequest {
-    private final String name;
+import com.widowvm.rest.interfaces.Request;
+
+public class CreateRequest extends Request {
     private final Integer size;
     private final Integer memory;
     private final Integer vCpus;
 
     public CreateRequest(){
-        this.name = "";
+        super("");
         this.size = 0;
         this.memory = 0;
         this.vCpus = 0;
     }
 
     public CreateRequest(String name, Integer size, Integer memory, Integer vCpus) {
-        this.name = name;
+        super(name);
         this.size = size;
         this.memory = memory;
         this.vCpus = vCpus;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public Integer getSize() {

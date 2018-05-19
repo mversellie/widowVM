@@ -1,25 +1,16 @@
 package com.widowvm.rest.create;
 
-public class CreateResponse {
-    private String name;
+import com.widowvm.rest.interfaces.Response;
+
+public class CreateResponse extends Response {
     private Integer status;
 
-    public CreateResponse() {
-
-    }
 
     public CreateResponse(String name,Integer status ) {
-        this.name = name;
+        super(name);
         this.status = status;
     }
 
-    public String getname() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public Integer getStatus() {
         return status;

@@ -15,8 +15,7 @@ public class StatusScriptGeneratorTest {
 
     @Before
     public void setUp() throws Exception {
-        request = new StatusRequest();
-        request.setName(TEST_VM_NAME);
+        request = new StatusRequest(TEST_VM_NAME);
         scriptGen = new StatusScriptGenerator(request);
     }
 

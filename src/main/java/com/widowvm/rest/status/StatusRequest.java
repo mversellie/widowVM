@@ -1,19 +1,11 @@
 package com.widowvm.rest.status;
 
-public class StatusRequest {
-    private String name;
+import com.widowvm.rest.interfaces.Request;
+
+public class StatusRequest extends Request{
 
     public StatusRequest(String name){
-        this.name = name;
+        super(name);
     }
 
-    public StatusRequest(){}
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

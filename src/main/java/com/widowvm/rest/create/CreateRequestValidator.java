@@ -1,34 +1,35 @@
 package com.widowvm.rest.create;
 
-public class CreateRequestValidator {
-    private CreateRequest createRequest;
+import com.widowvm.rest.interfaces.RequestValidator;
+
+public class CreateRequestValidator extends RequestValidator{
+
 
     public CreateRequestValidator(CreateRequest createRequest) {
-        this.createRequest = createRequest;
+        super(createRequest);
     }
+
 
     public boolean isRequestValid() {
+
+        CreateRequest createRequest = (CreateRequest)request;
+
+
         try {
-            if (createRequest.getSize() <= 0) {
-                return false;
-            }
+            return  (createRequest.getSize() > 0)   &&
+                    (createRequest.getMemory() > 0) &&
+                    (createRequest.getvCpus() > 0)  &&
+                    validateNameLength();
 
-            if (createRequest.getMemory() <= 0) {
-                return false;
-            }
-
-            if (createRequest.getName().length() == 0) {
-                return false;
-            }
-
-            if (createRequest.getvCpus() <= 0) {
-                return false;
-            }
-        } catch (NullPointerException badNewsBears) {
-            return false;
         }
 
+        catch (NullPointerException badNewsBears) {
+            return false;
 
-        return true;
+        }
     }
+
+
+
+
 }
