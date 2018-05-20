@@ -46,26 +46,26 @@ public class WidowVmControllerTest {
 
     @Test
     public void createVmWithValidRequest() throws Exception {
-        CreateResponse expectedResponse = new CreateResponse("myVm",200);
+        CreateResponse expectedResponse = new CreateResponse("myVm2",200);
         given(widowVmController.createVm(any(CreateRequest.class))).willReturn(expectedResponse);
             mockMvc.perform(post("/create")
                     .contentType(APPLICATION_JSON)
-                    .content("{\"size\":2000,\"memory\":2048,\"name\":\"myVm\",\"vCpus\":1}"))
+                    .content("{\"size\":2000,\"memory\":2048,\"name\":\"myMadeVm\",\"vCpus\":1}"))
                     .andExpect(status().isOk())
                     .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                    .andExpect(content().json("{\"name\":\"myVm\",\"status\":200}"));
+                    .andExpect(content().json("{\"name\":\"myMadeVm\",\"status\":200}"));
     }
 
     @Test
     public void createVmWithInvalidRequest() throws Exception {
-        CreateResponse expectedResponse = new CreateResponse("myVm",400);
+        CreateResponse expectedResponse = new CreateResponse("myMadeVm",400);
         given(widowVmController.createVm(any(CreateRequest.class))).willReturn(expectedResponse);
         mockMvc.perform(post("/create")
                 .contentType(APPLICATION_JSON)
-                .content("{\"memory\":2048,\"name\":\"myVm\",\"vCpus\":1}"))
+                .content("{\"memory\":2048,\"name\":\"myMadeVm\",\"vCpus\":1}"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json("{\"name\":\"myVm\",\"status\":400}"));
+                .andExpect(content().json("{\"name\":\"myMadeVm\",\"status\":400}"));
     }
 
     @Test
