@@ -1,0 +1,1 @@
+virsh destroy $vmName && virsh undefine $vmName

@@ -12,6 +12,10 @@ public class StatusResponse extends Response{
         super("");
     }
 
+    public StatusResponse(String name, Integer status) {
+        super(name,status);
+    }
+
     public boolean isRunning() {
         return isRunning;
     }
@@ -27,7 +31,6 @@ public class StatusResponse extends Response{
     public void setMemory(int memory) {
         this.memory = memory;
     }
-
 
     public Integer getvCpus() {
         return vCpus;

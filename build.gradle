@@ -56,4 +56,23 @@ clean.doLast {
 		ignoreExitValue = true
 		commandLine 'virsh', 'undefine', 'myVm'
 	}
+
+	exec {
+		ignoreExitValue = true
+		commandLine 'virsh', 'destroy', 'deleteVm'
+	}
+	exec{
+		ignoreExitValue = true
+		commandLine 'virsh', 'undefine', 'deleteVm'
+	}
+
+	exec {
+		ignoreExitValue = true
+		commandLine 'virt-install', '--name', 'deleteVm', '--ram', '1000', '--disk',
+				'path=/var/lib/libvirt/images/deleteVm,size=20', '--vcpus', '1', '--os-type', 'linux',
+				'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
+				'--console', 'pty,target_type=serial', '--location',
+				'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
+				'--extra-args', 'console=ttyS0'
+	}
 }

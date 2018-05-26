@@ -11,4 +11,8 @@ public class RequestValidator {
         return request.getName().length() != 0;
     }
 
+    public boolean isRequestValid(){
+        return false;
+    }
+
 }

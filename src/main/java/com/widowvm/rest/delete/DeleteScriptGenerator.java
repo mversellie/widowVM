@@ -1,4 +1,4 @@
-package com.widowvm.rest.status;
+package com.widowvm.rest.delete;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -8,24 +8,25 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 import java.io.StringWriter;
 
-public class StatusScriptGenerator{
+public class DeleteScriptGenerator{
 
-    public static String generateScript(StatusRequest statusRequest){
+    public static String generateScript(DeleteRequest request){
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
         velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         velocityEngine.init();
 
-        Template scriptTemplate = velocityEngine.getTemplate("templates/Status.vm");
+        Template scriptTemplate = velocityEngine.getTemplate("templates/Delete.vm");
 
         VelocityContext velocityContext = new VelocityContext();
-        velocityContext.put("vmName",statusRequest.getName());
+        velocityContext.put("vmName",request.getName());
 
         StringWriter output = new StringWriter();
 
         scriptTemplate.merge(velocityContext,output);
 
+        System.out.println(output.toString());
+
         return output.toString();
     }
-
 }

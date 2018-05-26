@@ -46,7 +46,7 @@ public class WidowVmControllerTest {
 
     @Test
     public void createVmWithValidRequest() throws Exception {
-        CreateResponse expectedResponse = new CreateResponse("myVm2",200);
+        CreateResponse expectedResponse = new CreateResponse("myMadeVm",200);
         given(widowVmController.createVm(any(CreateRequest.class))).willReturn(expectedResponse);
             mockMvc.perform(post("/create")
                     .contentType(APPLICATION_JSON)
