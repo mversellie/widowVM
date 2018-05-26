@@ -30,6 +30,7 @@ public class StatusServiceTest {
     @Test
     public void isResponseValid(){
         assert(testResponse.getMemory() != null);
+        System.out.println(testResponse.toString());
         assert(testResponse.getName().equals(correctResponse.getName()));
         assert(testResponse.getvCpus().equals(correctResponse.getvCpus()));
         assert(testResponse.isRunning() == correctResponse.isRunning());

@@ -2,6 +2,9 @@ package com.widowvm.rest;
 
 import com.widowvm.rest.create.CreateRequest;
 import com.widowvm.rest.create.CreateResponse;
+import com.widowvm.rest.delete.DeleteRequest;
+import com.widowvm.rest.delete.DeleteResponse;
+import com.widowvm.rest.delete.DeletionExpectedResponseMother;
 import com.widowvm.rest.status.StatusExpectedResponseMother;
 import com.widowvm.rest.status.StatusRequest;
 import com.widowvm.rest.status.StatusResponse;
@@ -78,5 +81,17 @@ public class WidowVmControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().json(StatusExpectedResponseMother.stringifiedResponse()));
+    }
+
+    @Test
+    public void deleteVmWithValidRequest() throws Exception{
+        DeleteResponse deletedResponse = DeletionExpectedResponseMother.generateDeletedResponse();
+        given(widowVmController.deleteVm(any(DeleteRequest.class))).willReturn(deletedResponse);
+        mockMvc.perform(post("/delete")
+                .contentType(APPLICATION_JSON)
+                .content("\"name\":\"deleteVm\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().json(DeletionExpectedResponseMother.stringifiedResponse()));
     }
 }

@@ -29,6 +29,19 @@ public class DeleteServiceTest {
         DeleteRequest badRequest = new DeleteRequest("wrongVm");
         DeleteResponse expectedResponse = new DeleteResponse("wrongVm", 400 , false);
         DeleteResponse actualResponse = DeleteService.deleteVm(badRequest);
+        assertEquals(expectedResponse.isDeletionStatus(), actualResponse.isDeletionStatus());
+        assertEquals(expectedResponse.getName(),actualResponse.getName());
+        assertEquals(expectedResponse.getStatus(),actualResponse.getStatus());
+    }
+
+    @Test
+    public void doesTeDeleteServiceReturnAnInvalidResponseToAnInvalidRequest() {
+        DeleteRequest badRequest = new DeleteRequest("");
+        DeleteResponse expectedResponse = new DeleteResponse("", 400 , false);
+        DeleteResponse actualResponse = DeleteService.deleteVm(badRequest);
+        assertEquals(expectedResponse.isDeletionStatus(), actualResponse.isDeletionStatus());
+        assertEquals(expectedResponse.getName(),actualResponse.getName());
+        assertEquals(expectedResponse.getStatus(),actualResponse.getStatus());
     }
 
     public DeleteResponse createExpectedCorrectResponse(){

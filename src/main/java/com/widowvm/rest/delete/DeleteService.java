@@ -1,8 +1,5 @@
 package com.widowvm.rest.delete;
 
-import com.widowvm.rest.create.CreateRequestValidator;
-import com.widowvm.rest.create.CreateResponse;
-import com.widowvm.rest.create.CreateScriptGenerator;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,12 +7,11 @@ public class DeleteService {
 
     public static DeleteResponse deleteVm(DeleteRequest request){
         DeleteRequestValidator requestValidator = new DeleteRequestValidator(request);
-        /*
+
         if(!requestValidator.isRequestValid()){
-            return new CreateResponse(request.getName(),400);
+            return new DeleteResponse("",400,false);
         }
 
-        */
         String script = DeleteScriptGenerator.generateScript(request);
 
         ProcessBuilder processBuilder = new ProcessBuilder("sh","-c",script);
@@ -25,18 +21,17 @@ public class DeleteService {
         try {
             Process deleteKvm = processBuilder.start();
             deleteKvm.waitFor();
-            //Integer exitCode = createKvm.exitValue();
-            Integer statusCode = 200;
-                    //exitCode == 0 ? 200 : 400;
-            return new DeleteResponse(request.getName(),statusCode,true);
+            Integer exitCode = deleteKvm.exitValue();
+            Integer statusCode = exitCode == 0 ? 200 : 400;
+            Boolean deletionStatus =  exitCode == 0 ? true : false;
+            return new DeleteResponse(request.getName(),statusCode,deletionStatus);
         }
 
         catch(Exception exception){
-        /*    exception.printStackTrace();
-            return new CreateResponse(createRequest.getName(),400);
-        */
+            exception.printStackTrace();
+            return new DeleteResponse(request.getName(),400,false);
+
         }
 
-        return null;
     }
 }
