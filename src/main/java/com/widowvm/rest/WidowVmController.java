@@ -33,7 +33,7 @@ public class WidowVmController {
 
     @PostMapping("/delete")
     public DeleteResponse deleteVm(@RequestBody DeleteRequest deleteRequest){
-        return DeleteService.deleteVm((deleteRequest));
+        return DeleteService.deleteVm(deleteRequest);
     }
 
 }

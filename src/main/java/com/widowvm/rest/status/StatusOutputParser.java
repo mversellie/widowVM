@@ -6,11 +6,11 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class VirshOutputParser {
+public class StatusOutputParser {
 
     private HashMap<String, String> attributeMap;
 
-    public VirshOutputParser(String virshOutput) throws IOException {
+    public StatusOutputParser(String virshOutput) throws IOException {
         attributeMap = new HashMap<>();
         BufferedReader reader = new BufferedReader(new StringReader(virshOutput));
         String currentLine = reader.readLine();

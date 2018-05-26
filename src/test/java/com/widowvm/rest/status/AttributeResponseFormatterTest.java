@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class AttributeResponseFormatterTest {
-    AttributeResponseFormatter formatter;
-    StatusResponse expectedResponse;
-    StatusResponse actualResponse;
+    private AttributeResponseFormatter formatter;
+    private StatusResponse expectedResponse;
+    private StatusResponse actualResponse;
 
     @Before
     public void setUp() throws Exception {
-        VirshOutputParser virshParser = new VirshOutputParser(VirshOutputMother.getAVirshOuput());
+        StatusOutputParser virshParser = new StatusOutputParser(VirshOutputMother.getAVirshOuput());
         formatter = new AttributeResponseFormatter(virshParser.getAttributeMap());
         actualResponse = formatter.getResponse();
         expectedResponse = StatusExpectedResponseMother.generateExpectedResponse();

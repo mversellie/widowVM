@@ -1,6 +1,8 @@
 package com.widowvm.rest.create;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.widowvm.rest.interfaces.Request;
 
 public class CreateRequest extends Request {
@@ -15,7 +17,12 @@ public class CreateRequest extends Request {
         this.vCpus = 0;
     }
 
-    public CreateRequest(String name, Integer size, Integer memory, Integer vCpus) {
+    @JsonCreator
+    public CreateRequest(@JsonProperty("name") String name,
+                         @JsonProperty("size") Integer size,
+                         @JsonProperty("memory") Integer memory,
+                         @JsonProperty("vCpus") Integer vCpus) {
+
         super(name);
         this.size = size;
         this.memory = memory;

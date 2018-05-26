@@ -16,7 +16,7 @@ public class StatusService {
         try {
             String output = IOUtils.toString(processBuilder.start().getInputStream());
 
-            VirshOutputParser parser = new VirshOutputParser(output);
+            StatusOutputParser parser = new StatusOutputParser(output);
 
             AttributeResponseFormatter formatter =
                     new AttributeResponseFormatter(parser.getAttributeMap());

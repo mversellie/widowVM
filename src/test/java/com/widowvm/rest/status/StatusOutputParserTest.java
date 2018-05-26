@@ -4,13 +4,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class VirshOutputParserTest {
+public class StatusOutputParserTest {
 
-    VirshOutputParser parser;
+    private StatusOutputParser parser;
 
     @Before
     public void setUp() throws Exception {
-        parser = new VirshOutputParser(VirshOutputMother.getAVirshOuput());
+        parser = new StatusOutputParser(VirshOutputMother.getAVirshOuput());
     }
 
     @Test
