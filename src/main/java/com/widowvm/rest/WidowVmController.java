@@ -29,22 +29,22 @@ public class WidowVmController {
     @Autowired
     private ListService listService;
 
-    @PostMapping("/create")
+    @PostMapping("/kvm/create")
     public CreateResponse createVm(@RequestBody CreateRequest createRequest){
         return createService.createVm(createRequest);
     }
 
-    @PostMapping("/status")
+    @PostMapping("/kvm/status")
     public StatusResponse getVmStatus(@RequestBody StatusRequest statusRequest){
         return statusService.getVmStatus(statusRequest);
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/kvm/delete")
     public DeleteResponse deleteVm(@RequestBody DeleteRequest deleteRequest){
         return deleteService.deleteVm(deleteRequest);
     }
 
-    @GetMapping("/list")
+    @GetMapping("/kvm/list")
     public ListResponse listVms(){
         return listService.listVms();
     }

@@ -52,37 +52,40 @@ dependencies {
 
 task createTestVms {
 
-	exec {
-		ignoreExitValue = true
-		commandLine 'virt-install', '--name', 'deleteVm', '--ram', '500', '--disk',
-				'path=/var/lib/libvirt/images/deleteVm,size=10', '--vcpus', '1', '--os-type', 'linux',
-				'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
-				'--console', 'pty,target_type=serial', '--location',
-				'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
-				'--extra-args', 'console=ttyS0'
-	}
+	doLast {
+
+		exec {
+			ignoreExitValue = true
+			commandLine 'virt-install', '--name', 'deleteVm', '--ram', '500', '--disk',
+					'path=/var/lib/libvirt/images/deleteVm,size=10', '--vcpus', '1', '--os-type', 'linux',
+					'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
+					'--console', 'pty,target_type=serial', '--location',
+					'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
+					'--extra-args', 'console=ttyS0'
+		}
 
 
 
-	exec {
-		ignoreExitValue = true
-		commandLine 'virt-install', '--name', 'listVm1', '--ram', '500', '--disk',
-				'path=/var/lib/libvirt/images/listVm1,size=10', '--vcpus', '1', '--os-type', 'linux',
-				'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
-				'--console', 'pty,target_type=serial', '--location',
-				'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
-				'--extra-args', 'console=ttyS0'
-	}
+		exec {
+			ignoreExitValue = true
+			commandLine 'virt-install', '--name', 'listVm1', '--ram', '500', '--disk',
+					'path=/var/lib/libvirt/images/listVm1,size=10', '--vcpus', '1', '--os-type', 'linux',
+					'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
+					'--console', 'pty,target_type=serial', '--location',
+					'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
+					'--extra-args', 'console=ttyS0'
+		}
 
 
-	exec {
-		ignoreExitValue = true
-		commandLine 'virt-install', '--name', 'statusVm', '--ram', '500', '--disk',
-				'path=/var/lib/libvirt/images/statusVm,size=10', '--vcpus', '1', '--os-type', 'linux',
-				'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
-				'--console', 'pty,target_type=serial', '--location',
-				'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
-				'--extra-args', 'console=ttyS0'
+		exec {
+			ignoreExitValue = true
+			commandLine 'virt-install', '--name', 'statusVm', '--ram', '500', '--disk',
+					'path=/var/lib/libvirt/images/statusVm,size=10', '--vcpus', '1', '--os-type', 'linux',
+					'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
+					'--console', 'pty,target_type=serial', '--location',
+					'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
+					'--extra-args', 'console=ttyS0'
+		}
 	}
 }
 

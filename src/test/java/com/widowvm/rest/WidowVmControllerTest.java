@@ -52,7 +52,7 @@ public class WidowVmControllerTest {
     public void createVmWithValidRequest() throws Exception {
         CreateResponse expectedResponse = new CreateResponse("myMadeVm",200);
         given(widowVmController.createVm(any(CreateRequest.class))).willReturn(expectedResponse);
-            mockMvc.perform(post("/create")
+            mockMvc.perform(post("/kvm/create")
                     .contentType(APPLICATION_JSON)
                     .content("{\"size\":2000,\"memory\":2048,\"name\":\"myMadeVm\",\"vCpus\":1}"))
                     .andExpect(status().isOk())
@@ -64,7 +64,7 @@ public class WidowVmControllerTest {
     public void createVmWithInvalidRequest() throws Exception {
         CreateResponse expectedResponse = new CreateResponse("myMadeVm",400);
         given(widowVmController.createVm(any(CreateRequest.class))).willReturn(expectedResponse);
-        mockMvc.perform(post("/create")
+        mockMvc.perform(post("/kvm/create")
                 .contentType(APPLICATION_JSON)
                 .content("{\"memory\":2048,\"name\":\"myMadeVm\",\"vCpus\":1}"))
                 .andExpect(status().isOk())
@@ -76,7 +76,7 @@ public class WidowVmControllerTest {
     public void statusVmWithValidRequest() throws Exception{
         StatusResponse expectedResponse = StatusExpectedResponseMother.generateExpectedCorrectResponse();
         given(widowVmController.getVmStatus(any(StatusRequest.class))).willReturn(expectedResponse);
-        mockMvc.perform(post("/status")
+        mockMvc.perform(post("/kvm/status")
                 .contentType(APPLICATION_JSON)
                 .content("{\"name\":\"status_test\"}"))
                 .andExpect(status().isOk())
@@ -88,7 +88,7 @@ public class WidowVmControllerTest {
     public void deleteVmWithValidRequest() throws Exception{
         DeleteResponse deletedResponse = DeletionExpectedResponseMother.generateDeletedResponse();
         given(widowVmController.deleteVm(any(DeleteRequest.class))).willReturn(deletedResponse);
-        mockMvc.perform(post("/delete")
+        mockMvc.perform(post("/kvm/delete")
                 .contentType(APPLICATION_JSON)
                 .content("{\"name\":\"deleteVm\"}"))
                 .andExpect(status().isOk())
@@ -100,7 +100,7 @@ public class WidowVmControllerTest {
     public void listVm() throws Exception{
         ListResponse listResponse = ListExpectedResponseMother.expectedResponse();
         given(widowVmController.listVms()).willReturn(listResponse);
-        mockMvc.perform(get("/list"))
+        mockMvc.perform(get("/kvm/list"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().json(ListExpectedResponseMother.expectedResponseAsString));
