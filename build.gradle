@@ -49,16 +49,8 @@ dependencies {
 
 
 
-test.doFirst {
-	exec {
-		ignoreExitValue = true
-		commandLine 'virsh', 'destroy', 'deleteVm'
-	}
-	exec {
-		ignoreExitValue = true
-		commandLine 'virsh', 'undefine', 'deleteVm'
-	}
 
+task createTestVms {
 
 	exec {
 		ignoreExitValue = true
@@ -92,38 +84,6 @@ test.doFirst {
 				'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
 				'--extra-args', 'console=ttyS0'
 	}
-
-	exec {
-		ignoreExitValue = true
-		commandLine 'virsh', 'destroy', 'createVm'
-	}
-	exec {
-		ignoreExitValue = true
-		commandLine 'virsh', 'undefine', 'createVm'
-	}
-
-}
-
-test.doLast {
-
-	exec {
-		ignoreExitValue = true
-		commandLine 'virsh', 'destroy', 'createVm'
-	}
-	exec {
-		ignoreExitValue = true
-		commandLine 'virsh', 'undefine', 'createVm'
-	}
-
-	exec {
-		ignoreExitValue = true
-		commandLine 'virsh', 'destroy', 'deleteVm'
-	}
-	exec {
-		ignoreExitValue = true
-		commandLine 'virsh', 'undefine', 'deleteVm'
-	}
-
 }
 
 
