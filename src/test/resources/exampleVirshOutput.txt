@@ -1,12 +1,12 @@
 Id:             2
-Name:           status_test
+Name:           statusVm
 UUID:           f499cf43-0180-f406-4056-a21ac0cf296b
 OS Type:        hvm
 State:          running
 CPU(s):         1
 CPU time:       29.3s
-Max memory:     2040000 KiB
-Used memory:    2040000 KiB
+Max memory:     500000 KiB
+Used memory:    500000 KiB
 Persistent:     yes
 Autostart:      enable
 Managed save:   no

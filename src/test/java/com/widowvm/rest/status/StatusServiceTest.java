@@ -1,40 +1,41 @@
 package com.widowvm.rest.status;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StatusServiceTest {
 
-    StatusResponse correctResponse;
+    StatusResponse expectedResponse;
     StatusRequest testRequest;
     StatusResponse testResponse;
 
-    @Before
-    public void setUp() throws Exception {
-        correctResponse = StatusExpectedResponseMother.generateExpectedResponse();
-        testRequest = new StatusRequest("status_test");
-        testResponse = StatusService.getVmStatus(testRequest);
-    }
-
-    @Test
-    public void isResponseNotNull() {
-        assert(testResponse != null);
-    }
 
     @Test
     public void isResponseValid(){
-        assert(testResponse.getMemory() != null);
-        System.out.println(testResponse.toString());
-        assert(testResponse.getName().equals(correctResponse.getName()));
-        assert(testResponse.getvCpus().equals(correctResponse.getvCpus()));
-        assert(testResponse.isRunning() == correctResponse.isRunning());
+        expectedResponse = StatusExpectedResponseMother.generateExpectedCorrectResponse();
+        testRequest = new StatusRequest("statusVm");
+        testResponse = StatusService.getVmStatus(testRequest);
+        assertNotEquals(null, testResponse.getMemory());
+        assertEquals(expectedResponse.getName(), testResponse.getName());
+        assertEquals(expectedResponse.getvCpus(), testResponse.getvCpus());
+        assertEquals(expectedResponse.isRunning(), testResponse.isRunning());
+        assertTrue(testResponse.isVmFound());
     }
 
-
+    @Test
+    public void isResponseinValidOnInvalidRequest() {
+        expectedResponse = StatusExpectedResponseMother.generateInvalidResponse();
+        StatusRequest badRequest = new StatusRequest("notAVm");
+        testResponse = StatusService.getVmStatus(badRequest);
+        assertEquals(badRequest.getName(), testResponse.getName());
+        assertEquals(0, testResponse.getAttributes().keySet().size());
+        assertEquals((Integer)400,testResponse.getStatus());
+        assertFalse(testResponse.isVmFound());
+    }
 }

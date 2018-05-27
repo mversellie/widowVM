@@ -13,7 +13,7 @@ public class AttributeResponseFormatterTest {
         StatusOutputParser virshParser = new StatusOutputParser(VirshOutputMother.getAVirshOuput());
         formatter = new AttributeResponseFormatter(virshParser.getAttributeMap());
         actualResponse = formatter.getResponse();
-        expectedResponse = StatusExpectedResponseMother.generateExpectedResponse();
+        expectedResponse = StatusExpectedResponseMother.generateExpectedCorrectResponse();
     }
 
     @Test
@@ -23,6 +23,8 @@ public class AttributeResponseFormatterTest {
 
     @Test
     public void isMemoryValid() {
+        System.out.println(expectedResponse.getMemory());
+        System.out.println(actualResponse.getMemory());
         assert(expectedResponse.getMemory().equals(actualResponse.getMemory()));
     }
 

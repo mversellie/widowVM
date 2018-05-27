@@ -5,6 +5,8 @@ import com.widowvm.rest.create.CreateService;
 import com.widowvm.rest.delete.DeleteRequest;
 import com.widowvm.rest.delete.DeleteResponse;
 import com.widowvm.rest.delete.DeleteService;
+import com.widowvm.rest.list.ListResponse;
+import com.widowvm.rest.list.ListService;
 import com.widowvm.rest.status.StatusRequest;
 import com.widowvm.rest.status.StatusResponse;
 import com.widowvm.rest.status.StatusService;
@@ -21,6 +23,12 @@ public class WidowVmController {
     @Autowired
     private StatusService statusService;
 
+    @Autowired
+    private DeleteService deleteService;
+
+    @Autowired
+    private ListService listService;
+
     @PostMapping("/create")
     public CreateResponse createVm(@RequestBody CreateRequest createRequest){
         return createService.createVm(createRequest);
@@ -33,7 +41,12 @@ public class WidowVmController {
 
     @PostMapping("/delete")
     public DeleteResponse deleteVm(@RequestBody DeleteRequest deleteRequest){
-        return DeleteService.deleteVm(deleteRequest);
+        return deleteService.deleteVm(deleteRequest);
+    }
+
+    @GetMapping("/list")
+    public ListResponse listVms(){
+        return listService.listVms();
     }
 
 }

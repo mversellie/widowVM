@@ -47,32 +47,129 @@ dependencies {
 	testCompile 'org.mockito:mockito-core:2.7.22'
 }
 
-clean.doLast {
+
+
+test.doFirst {
 	exec {
 		ignoreExitValue = true
-		commandLine 'virsh', 'destroy', 'myVm'
+		commandLine 'virsh', 'destroy', 'deleteVm'
 	}
-	exec{
+	exec {
 		ignoreExitValue = true
-		commandLine 'virsh', 'undefine', 'myVm'
+		commandLine 'virsh', 'undefine', 'deleteVm'
+	}
+
+
+	exec {
+		ignoreExitValue = true
+		commandLine 'virt-install', '--name', 'deleteVm', '--ram', '500', '--disk',
+				'path=/var/lib/libvirt/images/deleteVm,size=10', '--vcpus', '1', '--os-type', 'linux',
+				'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
+				'--console', 'pty,target_type=serial', '--location',
+				'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
+				'--extra-args', 'console=ttyS0'
+	}
+
+
+
+	exec {
+		ignoreExitValue = true
+		commandLine 'virt-install', '--name', 'listVm1', '--ram', '500', '--disk',
+				'path=/var/lib/libvirt/images/listVm1,size=10', '--vcpus', '1', '--os-type', 'linux',
+				'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
+				'--console', 'pty,target_type=serial', '--location',
+				'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
+				'--extra-args', 'console=ttyS0'
+	}
+
+
+	exec {
+		ignoreExitValue = true
+		commandLine 'virt-install', '--name', 'statusVm', '--ram', '500', '--disk',
+				'path=/var/lib/libvirt/images/statusVm,size=10', '--vcpus', '1', '--os-type', 'linux',
+				'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
+				'--console', 'pty,target_type=serial', '--location',
+				'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
+				'--extra-args', 'console=ttyS0'
+	}
+
+	exec {
+		ignoreExitValue = true
+		commandLine 'virsh', 'destroy', 'createVm'
+	}
+	exec {
+		ignoreExitValue = true
+		commandLine 'virsh', 'undefine', 'createVm'
+	}
+
+}
+
+test.doLast {
+
+	exec {
+		ignoreExitValue = true
+		commandLine 'virsh', 'destroy', 'createVm'
+	}
+	exec {
+		ignoreExitValue = true
+		commandLine 'virsh', 'undefine', 'createVm'
 	}
 
 	exec {
 		ignoreExitValue = true
 		commandLine 'virsh', 'destroy', 'deleteVm'
 	}
-	exec{
+	exec {
 		ignoreExitValue = true
 		commandLine 'virsh', 'undefine', 'deleteVm'
 	}
 
-	exec {
-		ignoreExitValue = true
-		commandLine 'virt-install', '--name', 'deleteVm', '--ram', '1000', '--disk',
-				'path=/var/lib/libvirt/images/deleteVm,size=20', '--vcpus', '1', '--os-type', 'linux',
-				'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
-				'--console', 'pty,target_type=serial', '--location',
-				'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
-				'--extra-args', 'console=ttyS0'
+}
+
+
+
+task killAllVms(dependsOn : 'killTempVms'){
+	doLast {
+		exec {
+			ignoreExitValue = true
+			commandLine 'virsh', 'destroy', 'listVm1'
+		}
+		exec {
+			ignoreExitValue = true
+			commandLine 'virsh', 'undefine', 'listVm1'
+		}
+
+		exec {
+			ignoreExitValue = true
+			commandLine 'virsh', 'destroy', 'statusVm'
+		}
+		exec {
+			ignoreExitValue = true
+			commandLine 'virsh', 'undefine', 'statusVm'
+		}
 	}
 }
+
+task killTempVms{
+	doLast {
+		exec {
+			ignoreExitValue = true
+			commandLine 'virsh', 'destroy', 'createVm'
+		}
+		exec {
+			ignoreExitValue = true
+			commandLine 'virsh', 'undefine', 'createVm'
+		}
+
+		exec {
+			ignoreExitValue = true
+			commandLine 'virsh', 'destroy', 'deleteVm'
+		}
+		exec {
+			ignoreExitValue = true
+			commandLine 'virsh', 'undefine', 'deleteVm'
+		}
+	}
+}
+
+

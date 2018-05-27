@@ -1,7 +1,7 @@
 virt-install \
---name 'myVM' \
+--name 'createVm' \
 --ram 2048 \
---disk path=/var/lib/libvirt/images/myVM,size=20 \
+--disk path=/var/lib/libvirt/images/createVm,size=20 \
 --vcpus 1 \
 --os-type linux \
 --os-variant ubuntuprecise \

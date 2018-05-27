@@ -5,6 +5,8 @@ import com.widowvm.rest.create.CreateResponse;
 import com.widowvm.rest.delete.DeleteRequest;
 import com.widowvm.rest.delete.DeleteResponse;
 import com.widowvm.rest.delete.DeletionExpectedResponseMother;
+import com.widowvm.rest.list.ListExpectedResponseMother;
+import com.widowvm.rest.list.ListResponse;
 import com.widowvm.rest.status.StatusExpectedResponseMother;
 import com.widowvm.rest.status.StatusRequest;
 import com.widowvm.rest.status.StatusResponse;
@@ -37,7 +39,6 @@ public class WidowVmControllerTest {
 
     @MockBean
     private WidowVmController widowVmController;
-
 
     @Autowired
     private WebApplicationContext wac;
@@ -73,14 +74,14 @@ public class WidowVmControllerTest {
 
     @Test
     public void statusVmWithValidRequest() throws Exception{
-        StatusResponse expectedResponse = StatusExpectedResponseMother.generateExpectedResponse();
+        StatusResponse expectedResponse = StatusExpectedResponseMother.generateExpectedCorrectResponse();
         given(widowVmController.getVmStatus(any(StatusRequest.class))).willReturn(expectedResponse);
         mockMvc.perform(post("/status")
                 .contentType(APPLICATION_JSON)
-                .content("\"name\":\"status_test\"}"))
+                .content("{\"name\":\"status_test\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json(StatusExpectedResponseMother.stringifiedResponse()));
+                .andExpect(content().json(StatusExpectedResponseMother.stringifiedCorrectResponse()));
     }
 
     @Test
@@ -89,9 +90,19 @@ public class WidowVmControllerTest {
         given(widowVmController.deleteVm(any(DeleteRequest.class))).willReturn(deletedResponse);
         mockMvc.perform(post("/delete")
                 .contentType(APPLICATION_JSON)
-                .content("\"name\":\"deleteVm\"}"))
+                .content("{\"name\":\"deleteVm\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().json(DeletionExpectedResponseMother.stringifiedResponse()));
+    }
+
+    @Test
+    public void listVm() throws Exception{
+        ListResponse listResponse = ListExpectedResponseMother.expectedResponse();
+        given(widowVmController.listVms()).willReturn(listResponse);
+        mockMvc.perform(get("/list"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().json(ListExpectedResponseMother.expectedResponseAsString));
     }
 }

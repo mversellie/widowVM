@@ -13,4 +13,5 @@ public class ListOutputParserTest {
         ArrayList<String> machines = ListOutputParser.parse(ListOutputMother.getAListOutput());
         assertEquals(machines.size(),3);
     }
+
 }

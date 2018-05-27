@@ -20,14 +20,14 @@ public class CreateScriptGeneratorTest {
 
     @Test
     public void doesGenerateScriptReturnAString() {
-        CreateRequest testRequest = new CreateRequest("myVM",20,34,2);
+        CreateRequest testRequest = new CreateRequest("createVm",20,34,2);
         assert(CreateScriptGenerator.generateScript(testRequest) instanceof String);
     }
 
     @Test
     public void doesGenerateScriptReturnCorrectCommand() throws Exception{
         String validJsonLocation = System.getProperty("user.dir") +"/src/test/resources/validCreateScript.sh";
-        CreateRequest createRequest = new CreateRequest("myVM",20,2048,1);
+        CreateRequest createRequest = new CreateRequest("createVm",20,2048,1);
         String correctScript = new String (Files.readAllBytes(Paths.get(validJsonLocation)));
         assertEquals(correctScript,CreateScriptGenerator.generateScript(createRequest));
     }

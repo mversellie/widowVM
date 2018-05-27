@@ -1,12 +1,16 @@
 package com.widowvm.rest.status;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.widowvm.rest.interfaces.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class StatusResponse extends Response{
-    private Integer memory = 0;
-    private Integer vCpus = 0;
-    private boolean isRunning = false;
+
+    private boolean vmFound = false;
+    private Map<String,Object> attributes = new HashMap();
 
     public StatusResponse(){
         super("");
@@ -16,27 +20,46 @@ public class StatusResponse extends Response{
         super(name,status);
     }
 
+    @JsonIgnore
     public boolean isRunning() {
-        return isRunning;
+        return (boolean)attributes.get("isRunning");
     }
 
     public void setRunning(boolean running) {
-        isRunning = running;
+        attributes.put("isRunning",running);
     }
 
+    @JsonIgnore
     public Integer getMemory() {
-        return memory;
+        return (Integer)attributes.get("memory");
     }
 
-    public void setMemory(int memory) {
-        this.memory = memory;
+    public void setMemory(Integer memory) {
+        attributes.put("memory",memory);
     }
 
+    @JsonIgnore
     public Integer getvCpus() {
-        return vCpus;
+        return (Integer)attributes.get("vCpus");
     }
 
     public void setvCpus(Integer vCpus) {
-        this.vCpus = vCpus;
+        attributes.put("vCpus",vCpus);
+    }
+
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Map<String, Object> attributes) {
+        this.attributes = attributes;
+    }
+
+    public boolean isVmFound() {
+        return vmFound;
+    }
+
+    public void setVmFound(boolean vmFound) {
+        this.vmFound = vmFound;
     }
 }

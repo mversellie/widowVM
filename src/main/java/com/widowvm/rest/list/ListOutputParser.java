@@ -9,15 +9,16 @@ public final class ListOutputParser {
 
     public static ArrayList<String> parse(String listOutput) throws IOException {
         ArrayList<String> machines = new ArrayList();
-/*
         BufferedReader reader = new BufferedReader(new StringReader(listOutput));
         String currentLine = reader.readLine();
 
         while(currentLine != null){
-            machines.add(currentLine);
-            reader.readLine();
+            if(!currentLine.equals("")) {
+                machines.add(currentLine);
+            }
+            currentLine = reader.readLine();
         }
-*/
+
         return machines;
     }
 
