@@ -75,10 +75,8 @@ public class WidowVmControllerTest {
     @Test
     public void statusVmWithValidRequest() throws Exception{
         StatusResponse expectedResponse = StatusExpectedResponseMother.generateExpectedCorrectResponse();
-        given(widowVmController.getVmStatus(any(StatusRequest.class))).willReturn(expectedResponse);
-        mockMvc.perform(post("/kvm/status")
-                .contentType(APPLICATION_JSON)
-                .content("{\"name\":\"status_test\"}"))
+        given(widowVmController.getVmStatus(any(String.class))).willReturn(expectedResponse);
+        mockMvc.perform(get("/kvm/statusVm/status"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(content().json(StatusExpectedResponseMother.stringifiedCorrectResponse()));

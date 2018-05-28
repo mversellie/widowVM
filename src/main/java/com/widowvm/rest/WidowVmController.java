@@ -34,9 +34,9 @@ public class WidowVmController {
         return createService.createVm(createRequest);
     }
 
-    @PostMapping("/kvm/status")
-    public StatusResponse getVmStatus(@RequestBody StatusRequest statusRequest){
-        return statusService.getVmStatus(statusRequest);
+    @GetMapping("/kvm/{vmName}/status")
+    public StatusResponse getVmStatus(@PathVariable("vmName") String vmName){
+        return statusService.getVmStatus(new StatusRequest(vmName));
     }
 
     @PostMapping("/kvm/delete")

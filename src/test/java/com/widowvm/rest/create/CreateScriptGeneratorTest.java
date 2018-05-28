@@ -25,10 +25,10 @@ public class CreateScriptGeneratorTest {
     }
 
     @Test
-    public void doesGenerateScriptReturnCorrectCommand() throws Exception{
-        String validJsonLocation = System.getProperty("user.dir") +"/src/test/resources/validCreateScript.sh";
+    public void doesGenerateScriptReturnCorrectCommandNoKickstart() throws Exception{
+        String validScriptLocation = System.getProperty("user.dir") +"/src/test/resources/validCreateScriptNoKickStart.sh";
         CreateRequest createRequest = new CreateRequest("createVm",20,2048,1);
-        String correctScript = new String (Files.readAllBytes(Paths.get(validJsonLocation)));
+        String correctScript = new String (Files.readAllBytes(Paths.get(validScriptLocation)));
         assertEquals(correctScript,CreateScriptGenerator.generateScript(createRequest));
     }
 }
