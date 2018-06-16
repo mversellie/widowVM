@@ -1,8 +1,8 @@
 package com.widowvm.rest.delete;
 
-import com.widowvm.rest.interfaces.Response;
+import com.widowvm.rest.interfaces.ResponseInterface;
 
-public class DeleteResponse extends Response{
+public class DeleteResponse extends ResponseInterface {
     private boolean deletionStatus;
 
     public DeleteResponse(String name, Integer status, boolean deletionStatus) {

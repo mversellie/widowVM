@@ -3,11 +3,13 @@ package com.widowvm.rest.delete;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class DeleteServiceTest {
     DeleteRequest request;
     String vmName ;
+
+    private DeleteService deleteService = new DeleteService();
 
     @Before
     public void setUp() throws Exception {
@@ -17,7 +19,7 @@ public class DeleteServiceTest {
 
     @Test
     public void doesTheDeleteServiceWorkWithValidResponseAndVm() {
-        DeleteResponse actualResponse = DeleteService.deleteVm(request);
+        DeleteResponse actualResponse = deleteService.deleteVm(request);
         DeleteResponse expectedResponse = createExpectedCorrectResponse();
         assertEquals(expectedResponse.isDeletionStatus(), actualResponse.isDeletionStatus());
         assertEquals(expectedResponse.getName(),actualResponse.getName());
@@ -28,7 +30,7 @@ public class DeleteServiceTest {
     public void doesTheDeleteServiceReturnAnInvalidResponse() {
         DeleteRequest badRequest = new DeleteRequest("wrongVm");
         DeleteResponse expectedResponse = new DeleteResponse("wrongVm", 400 , false);
-        DeleteResponse actualResponse = DeleteService.deleteVm(badRequest);
+        DeleteResponse actualResponse = deleteService.deleteVm(badRequest);
         assertEquals(expectedResponse.isDeletionStatus(), actualResponse.isDeletionStatus());
         assertEquals(expectedResponse.getName(),actualResponse.getName());
         assertEquals(expectedResponse.getStatus(),actualResponse.getStatus());
@@ -38,7 +40,7 @@ public class DeleteServiceTest {
     public void doesTeDeleteServiceReturnAnInvalidResponseToAnInvalidRequest() {
         DeleteRequest badRequest = new DeleteRequest("");
         DeleteResponse expectedResponse = new DeleteResponse("", 400 , false);
-        DeleteResponse actualResponse = DeleteService.deleteVm(badRequest);
+        DeleteResponse actualResponse = deleteService.deleteVm(badRequest);
         assertEquals(expectedResponse.isDeletionStatus(), actualResponse.isDeletionStatus());
         assertEquals(expectedResponse.getName(),actualResponse.getName());
         assertEquals(expectedResponse.getStatus(),actualResponse.getStatus());

@@ -7,6 +7,14 @@ virt-install \
 --os-variant ubuntuprecise \
 --network bridge=virbr0 \
 --graphics none \
+#if( !$ksPath )
 --console pty,target_type=serial \
+#end
 --location 'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/' \
---extra-args 'console=ttyS0'
+#if( $ksPath && $ksName )
+--initrd-inject='$ksPath' \
+--extra-args "ks='file:/$ksName' console=ttyS0" \
+#else
+--extra-args 'console=ttyS0' \
+#end
+--noreboot

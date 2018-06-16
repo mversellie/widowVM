@@ -24,7 +24,7 @@ public class KickStartFileValueListParserTest {
     @Test
     public void doesMapperReturnValidNumberOfElements() {
         assertNotEquals(0, actualKickStartList.size());
-        assertEquals(21, actualKickStartList.size());
+        assertEquals(22, actualKickStartList.size());
     }
 
     @Test

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DeleteService {
 
-    public static DeleteResponse deleteVm(DeleteRequest request){
+    public DeleteResponse deleteVm(DeleteRequest request){
         DeleteRequestValidator requestValidator = new DeleteRequestValidator(request);
 
         if(!requestValidator.isRequestValid()){

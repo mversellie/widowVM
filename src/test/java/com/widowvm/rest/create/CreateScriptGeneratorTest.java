@@ -1,13 +1,10 @@
 package com.widowvm.rest.create;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.widowvm.rest.create.*;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -25,10 +22,19 @@ public class CreateScriptGeneratorTest {
     }
 
     @Test
-    public void doesGenerateScriptReturnCorrectCommandNoKickstart() throws Exception{
+    public void doesGenerateScriptReturnCorrectCommandNoKickstart() throws IOException {
         String validScriptLocation = System.getProperty("user.dir") +"/src/test/resources/validCreateScriptNoKickStart.sh";
         CreateRequest createRequest = new CreateRequest("createVm",20,2048,1);
         String correctScript = new String (Files.readAllBytes(Paths.get(validScriptLocation)));
         assertEquals(correctScript,CreateScriptGenerator.generateScript(createRequest));
+    }
+
+    @Test
+    public void doesGenerateScriptReturnCorrectCommandWithKickstart() throws IOException {
+            String validScriptLocation = System.getProperty("user.dir") +"/src/test/resources/validCreateScriptWithKickStart.sh";
+            CreateRequest createRequest = new CreateRequest("createVm",20,2048,1);
+            createRequest.getAdditionalOptions().put("rootPassword","rootPassword!");
+            String correctScript = new String (Files.readAllBytes(Paths.get(validScriptLocation)));
+            assertEquals(correctScript,CreateScriptGenerator.generateScript(createRequest,"/directory/kickstart.ks"));
     }
 }

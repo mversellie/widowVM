@@ -42,9 +42,9 @@ zerombr yes
 clearpart --all --initlabel
 
 #Basic disk partition
-part / --fstype ext4 --size 1 --grow --asprimary
 part swap --size 1024
 part /boot --fstype ext4 --size 256 --asprimary
+part / --fstype ext4 --size 1 --grow --asprimary
 
 #Advanced partition
 #part /boot --fstype=ext4 --size=500 --asprimary
@@ -64,3 +64,5 @@ firewall --disabled --trust=eth0 --ssh
 
 #Do not configure the X Window System
 skipx
+
+preseed user-setup/allow-password-weak boolean true

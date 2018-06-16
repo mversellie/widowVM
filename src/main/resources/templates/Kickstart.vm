@@ -1,19 +1,13 @@
-#System language
 lang en_US
 
-#Language modules to install
 langsupport en_US
 
-#System keyboard
 keyboard us
 
-#System mouse
 mouse
 
-#System timezone
 timezone America/New_York
 
-#Root password
 #if( $rootPassword )
 #if( $encryptRootPassword == "true")
 rootpw --iscrypted $rootPassword
@@ -24,7 +18,6 @@ rootpw $rootPassword
 rootpw --disabled
 #end
 
-#Initial user (user with sudo capabilities)
 #if($sudoUser && $sudoPassword)
 user $sudoUser --password $sudoPassword
 #else
@@ -34,37 +27,28 @@ user --disabled
 #Reboot after installation
 reboot
 
-#Use text mode install
 text
 
-#Install OS instead of upgrade
 install
 
-#Installation media
 cdrom
 
-#System bootloader configuration
 bootloader --location=mbr
 
-#Clear the Master Boot Record
 zerombr yes
 
-#Partition clearing information
 clearpart --all --initlabel
 
-#Basic disk partition
-part / --fstype ext4 --size 1 --grow --asprimary
 part swap --size 1024
 part /boot --fstype ext4 --size 256 --asprimary
+part / --fstype ext4 --size 1 --grow --asprimary
 
-#System authorization infomation
 auth  --useshadow  --enablemd5
 
-#Network information
 network --bootproto=dhcp --device=eth0
 
-#Firewall configuration
 firewall --disabled --trust=eth0 --ssh
 
-#Do not configure the X Window System
 skipx
+
+preseed user-setup/allow-password-weak boolean true

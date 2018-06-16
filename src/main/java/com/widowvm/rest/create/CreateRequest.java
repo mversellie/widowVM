@@ -3,13 +3,12 @@ package com.widowvm.rest.create;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.widowvm.rest.interfaces.Request;
+import com.widowvm.rest.interfaces.RequestInterface;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
-public class CreateRequest extends Request {
+public class CreateRequest extends RequestInterface {
     private final Integer size;
     private final Integer memory;
     private final Integer vCpus;
@@ -35,7 +34,7 @@ public class CreateRequest extends Request {
         this.additionalOptions = options;
     }
 
-    public CreateRequest(String name,Integer size,Integer memory,Integer vCpus){
+    public CreateRequest(String name, Integer size, Integer memory, Integer vCpus){
         super(name);
         this.size = size;
         this.memory = memory;

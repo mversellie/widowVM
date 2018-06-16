@@ -20,13 +20,14 @@ public class KickStartExpectedListMother {
                 "bootloader --location=mbr",
                 "zerombr yes",
                 "clearpart --all --initlabel",
-                "part / --fstype ext4 --size 1 --grow --asprimary",
                 "part swap --size 1024",
                 "part /boot --fstype ext4 --size 256 --asprimary",
+                "part / --fstype ext4 --size 1 --grow --asprimary",
                 "auth  --useshadow  --enablemd5",
                 "network --bootproto=dhcp --device=eth0",
                 "firewall --disabled --trust=eth0 --ssh",
-                "skipx"
+                "skipx",
+                "preseed user-setup/allow-password-weak boolean true"
         };
 
         return  new ArrayList<String>(Arrays.asList(stringNotList));
@@ -48,13 +49,14 @@ public class KickStartExpectedListMother {
                 "bootloader --location=mbr",
                 "zerombr yes",
                 "clearpart --all --initlabel",
-                "part / --fstype ext4 --size 1 --grow --asprimary",
                 "part swap --size 1024",
                 "part /boot --fstype ext4 --size 256 --asprimary",
+                "part / --fstype ext4 --size 1 --grow --asprimary",
                 "auth  --useshadow  --enablemd5",
                 "network --bootproto=dhcp --device=eth0",
                 "firewall --disabled --trust=eth0 --ssh",
-                "skipx"
+                "skipx",
+                "preseed user-setup/allow-password-weak boolean true"
         };
 
         return  new ArrayList<String>(Arrays.asList(stringNotList));

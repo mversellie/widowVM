@@ -1,6 +1,5 @@
 package com.widowvm.rest.status;
 
-import com.widowvm.rest.delete.DeleteResponse;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class StatusService {
 
-    public static StatusResponse getVmStatus(StatusRequest statusRequest) {
+    public StatusResponse getVmStatus(StatusRequest statusRequest) {
         String script = StatusScriptGenerator.generateScript(statusRequest);
         StatusResponse response;
 

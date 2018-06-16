@@ -2,6 +2,7 @@ package com.widowvm.rest.status;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
@@ -10,6 +11,9 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StatusServiceTest {
+
+    @Autowired
+            StatusService statusService;
 
     StatusResponse expectedResponse;
     StatusRequest testRequest;
@@ -20,7 +24,7 @@ public class StatusServiceTest {
     public void isResponseValid(){
         expectedResponse = StatusExpectedResponseMother.generateExpectedCorrectResponse();
         testRequest = new StatusRequest("statusVm");
-        testResponse = StatusService.getVmStatus(testRequest);
+        testResponse = statusService.getVmStatus(testRequest);
         assertNotEquals(null, testResponse.getMemory());
         assertEquals(expectedResponse.getName(), testResponse.getName());
         assertEquals(expectedResponse.getvCpus(), testResponse.getvCpus());
@@ -32,7 +36,7 @@ public class StatusServiceTest {
     public void isResponseinValidOnInvalidRequest() {
         expectedResponse = StatusExpectedResponseMother.generateInvalidResponse();
         StatusRequest badRequest = new StatusRequest("notAVm");
-        testResponse = StatusService.getVmStatus(badRequest);
+        testResponse = statusService.getVmStatus(badRequest);
         assertEquals(badRequest.getName(), testResponse.getName());
         assertEquals(0, testResponse.getAttributes().keySet().size());
         assertEquals((Integer)400,testResponse.getStatus());

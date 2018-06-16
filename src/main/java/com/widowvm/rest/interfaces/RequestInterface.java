@@ -1,9 +1,9 @@
 package com.widowvm.rest.interfaces;
 
-public class Request {
+public class RequestInterface {
     protected final String name;
 
-    public Request(String name) {
+    public RequestInterface(String name) {
         this.name = name;
     }
 

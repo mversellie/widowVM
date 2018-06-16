@@ -1,15 +1,15 @@
 package com.widowvm.rest.interfaces;
 
-public class Response {
+public class ResponseInterface {
     protected String name;
     protected Integer status;
 
-    public Response(String name,Integer status) {
+    public ResponseInterface(String name, Integer status) {
         this.name = name;
         this.status = status;
     }
 
-    public Response(String name){
+    public ResponseInterface(String name){
         this.name = name;
     }
 

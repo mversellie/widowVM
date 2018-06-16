@@ -2,12 +2,12 @@ package com.widowvm.rest.status;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.widowvm.rest.interfaces.Response;
+import com.widowvm.rest.interfaces.ResponseInterface;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class StatusResponse extends Response{
+public class StatusResponse extends ResponseInterface {
 
     private boolean vmFound = false;
     private Map<String,Object> attributes = new HashMap();

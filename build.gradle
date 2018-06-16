@@ -38,6 +38,8 @@ dependencies {
 	compile('org.springframework.retry:spring-retry')
 	compile('org.springframework.session:spring-session-core')
 	compile('org.apache.directory.studio:org.apache.commons.io:2.4')
+	compile 'org.apache.httpcomponents:httpclient:4.5.5'
+	compile 'org.apache.httpcomponents:httpcore:4.4.1'
 	runtime('org.springframework.boot:spring-boot-devtools')
 	compileOnly('org.springframework.boot:spring-boot-configuration-processor')
 	compileOnly('org.projectlombok:lombok')

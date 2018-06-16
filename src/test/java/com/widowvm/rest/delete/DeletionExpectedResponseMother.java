@@ -1,7 +1,5 @@
 package com.widowvm.rest.delete;
 
-import com.widowvm.rest.status.StatusResponse;
-
 public class DeletionExpectedResponseMother {
 
     public static String stringifiedResponse(){
