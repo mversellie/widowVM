@@ -19,7 +19,7 @@ public class StatusService {
             String output = IOUtils.toString(statusProcess.getInputStream());
 
             Integer exitCode = statusProcess.exitValue();
-            Integer statusCode = exitCode == 0 ? 200 : 400;
+            Boolean statusCode = exitCode == 0 ? true : false;
             Boolean vmFound = exitCode == 0 ? true : false;
 
             if(vmFound) {
@@ -35,16 +35,15 @@ public class StatusService {
                 response.setName(statusRequest.getName());
             }
 
-            response.setVmFound(vmFound);
-            response.setStatus(statusCode);
+            response.setSuccess(statusCode);
 
             return response;
         }
 
         catch(Exception exception){
             exception.printStackTrace();
-            response = new StatusResponse(statusRequest.getName(),400);
-            response.setVmFound(false);
+            response = new StatusResponse(statusRequest.getName(),false);
+            response.setSuccess(false);
             return response;
         }
     }

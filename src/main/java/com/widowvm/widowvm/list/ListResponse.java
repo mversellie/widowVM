@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class ListResponse {
     private ArrayList<String> names;
-    private Integer status =  200;
+    private boolean success =  true;
 
     public ListResponse(ArrayList<String> names){
         this.names = names;
     }
 
-    public ListResponse(ArrayList<String> names, Integer status) {
+    public ListResponse(ArrayList<String> names, Boolean success) {
         this.names = names;
-        this.status = status;
+        this.success = success;
     }
 
     public ArrayList<String> getNames() {
@@ -23,11 +23,11 @@ public class ListResponse {
         this.names = names;
     }
 
-    public Integer getStatus() {
-        return status;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 }

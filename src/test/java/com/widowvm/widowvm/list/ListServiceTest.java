@@ -10,6 +10,6 @@ public class ListServiceTest {
         ListResponse actualResponse = ListService.listVms();
         assertTrue(actualResponse.getNames().contains("listVm1"));
         assertTrue(actualResponse.getNames().contains("statusVm"));
-        assertEquals((Integer)200,actualResponse.getStatus());
+        assertEquals(true,actualResponse.isSuccess());
     }
 }

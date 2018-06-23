@@ -62,7 +62,7 @@ public class WidowVmControllerIntegrationTest {
 
         String machineName = "skjd";
 
-        CreateResponse expectedResponse = new CreateResponse("skjd",200);
+        CreateResponse expectedResponse = new CreateResponse("skjd",true);
 
         CreateRequest testRequestBeforeCreate = new CreateRequest("skjd",5,500,1);
         testRequestBeforeCreate.getAdditionalOptions().put("rootPassword","rootPassword!");
@@ -88,7 +88,7 @@ public class WidowVmControllerIntegrationTest {
 
         CreateRequest invalidRequest = new CreateRequest();
 
-        CreateResponse expectedResponse = new CreateResponse("",400);
+        CreateResponse expectedResponse = new CreateResponse("",false);
 
         this.mockMvc.perform(post(CREATE_ENDPOINT)
                 .contentType(MediaType.APPLICATION_JSON)

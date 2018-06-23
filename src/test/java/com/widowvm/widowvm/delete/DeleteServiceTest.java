@@ -21,33 +21,30 @@ public class DeleteServiceTest {
     public void doesTheDeleteServiceWorkWithValidResponseAndVm() {
         DeleteResponse actualResponse = deleteService.deleteVm(request);
         DeleteResponse expectedResponse = createExpectedCorrectResponse();
-        assertEquals(expectedResponse.isDeletionStatus(), actualResponse.isDeletionStatus());
         assertEquals(expectedResponse.getName(),actualResponse.getName());
-        assertEquals(expectedResponse.getStatus(),actualResponse.getStatus());
+        assertEquals(expectedResponse.isSuccess(),actualResponse.isSuccess());
     }
 
     @Test
     public void doesTheDeleteServiceReturnAnInvalidResponse() {
         DeleteRequest badRequest = new DeleteRequest("wrongVm");
-        DeleteResponse expectedResponse = new DeleteResponse("wrongVm", 400 , false);
+        DeleteResponse expectedResponse = new DeleteResponse("wrongVm", false );
         DeleteResponse actualResponse = deleteService.deleteVm(badRequest);
-        assertEquals(expectedResponse.isDeletionStatus(), actualResponse.isDeletionStatus());
         assertEquals(expectedResponse.getName(),actualResponse.getName());
-        assertEquals(expectedResponse.getStatus(),actualResponse.getStatus());
+        assertEquals(expectedResponse.isSuccess(),actualResponse.isSuccess());
     }
 
     @Test
     public void doesTeDeleteServiceReturnAnInvalidResponseToAnInvalidRequest() {
         DeleteRequest badRequest = new DeleteRequest("");
-        DeleteResponse expectedResponse = new DeleteResponse("", 400 , false);
+        DeleteResponse expectedResponse = new DeleteResponse("", false );
         DeleteResponse actualResponse = deleteService.deleteVm(badRequest);
-        assertEquals(expectedResponse.isDeletionStatus(), actualResponse.isDeletionStatus());
         assertEquals(expectedResponse.getName(),actualResponse.getName());
-        assertEquals(expectedResponse.getStatus(),actualResponse.getStatus());
+        assertEquals(expectedResponse.isSuccess(),actualResponse.isSuccess());
     }
 
     public DeleteResponse createExpectedCorrectResponse(){
-        return new DeleteResponse("deleteVm1", 200 , true);
+        return new DeleteResponse("deleteVm1", true );
     }
 
 }

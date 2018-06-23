@@ -2,11 +2,11 @@ package com.widowvm.widowvm.interfaces;
 
 public class ResponseInterface {
     protected String name;
-    protected Integer status;
+    protected boolean success;
 
-    public ResponseInterface(String name, Integer status) {
+    public ResponseInterface(String name, boolean status) {
         this.name = name;
-        this.status = status;
+        this.success = status;
     }
 
     public ResponseInterface(String name){
@@ -21,11 +21,11 @@ public class ResponseInterface {
         this.name = name;
     }
 
-    public Integer getStatus() {
-        return status;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 }

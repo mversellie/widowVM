@@ -11,7 +11,7 @@ public class CreateService {
         CreateRequestValidator requestValidator = new CreateRequestValidator(createRequest);
 
         if(!requestValidator.isRequestValid()){
-            return new CreateResponse(createRequest.getName(),400);
+            return new CreateResponse(createRequest.getName(),false);
         }
 
         String script;
@@ -39,13 +39,13 @@ public class CreateService {
             Process createKvm = processBuilder.start();
             createKvm.waitFor();
             Integer exitCode = createKvm.exitValue();
-            Integer statusCode = exitCode == 0 ? 200 : 400;
+            Boolean statusCode = exitCode == 0 ? true : false;
             return new CreateResponse(createRequest.getName(),statusCode);
         }
 
         catch(Exception exception){
             exception.printStackTrace();
-            return new CreateResponse(createRequest.getName(),400);
+            return new CreateResponse(createRequest.getName(),false);
         }
 
     }

@@ -24,7 +24,6 @@ import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
-//@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class WidowVmControllerTest {
 
@@ -45,7 +44,7 @@ public class WidowVmControllerTest {
     public void createVmWithValidRequest() throws Exception {
         //arrange
         CreateRequest createRequest = new CreateRequest("controllerCreateVmTest",6,512,1);
-        CreateResponse expectedResponse = new CreateResponse("controllerCreateVmTest",200);
+        CreateResponse expectedResponse = new CreateResponse("controllerCreateVmTest",true);
 
         when(createService.createVm(any())).thenReturn(expectedResponse);
 
@@ -55,13 +54,13 @@ public class WidowVmControllerTest {
         //assert
         verify(createService).createVm(any());
         assert(actualResponse.getName()).equals(expectedResponse.getName());
-        assert(actualResponse.getStatus()).equals(expectedResponse.getStatus());
+        assert(actualResponse.isSuccess() == expectedResponse.isSuccess());
     }
 
     @Test
     public void createVmWithInvalidRequest() throws Exception {
         CreateRequest createRequest = new CreateRequest("",0,0,0);
-        CreateResponse expectedResponse = new CreateResponse("",400);
+        CreateResponse expectedResponse = new CreateResponse("",false);
 
         when(createService.createVm(any())).thenReturn(expectedResponse);
 
@@ -71,7 +70,7 @@ public class WidowVmControllerTest {
         //assert
         verify(createService).createVm(any());
         assert(actualResponse.getName()).equals(expectedResponse.getName());
-        assert(actualResponse.getStatus()).equals(expectedResponse.getStatus());
+        assert(actualResponse.isSuccess() == expectedResponse.isSuccess());
 
     }
 
@@ -96,8 +95,7 @@ public class WidowVmControllerTest {
         Assert.assertEquals(expectedResponse.getMemory(),actualResponse.getMemory());
         Assert.assertEquals(expectedResponse.getvCpus(),actualResponse.getvCpus());
         Assert.assertEquals(expectedResponse.isRunning(),actualResponse.isRunning());
-        Assert.assertEquals(expectedResponse.isVmFound(),actualResponse.isVmFound());
-        Assert.assertEquals(expectedResponse.getStatus(),actualResponse.getStatus());
+        Assert.assertEquals(expectedResponse.isSuccess(),actualResponse.isSuccess());
         Assert.assertEquals(expectedResponse.getName(),actualResponse.getName());
 
 
@@ -116,7 +114,7 @@ public class WidowVmControllerTest {
 
         //assert
         verify(deleteService).deleteVm(any());
-        Assert.assertEquals(actualResponse.getStatus(),expectedResponse.getStatus());
+        Assert.assertEquals(actualResponse.isSuccess(),expectedResponse.isSuccess());
         Assert.assertEquals(actualResponse.getName(),expectedResponse.getName());
     }
 

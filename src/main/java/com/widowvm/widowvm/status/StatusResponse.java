@@ -9,14 +9,13 @@ import java.util.Map;
 
 public class StatusResponse extends ResponseInterface {
 
-    private boolean vmFound = false;
     private Map<String,Object> attributes = new HashMap();
 
     public StatusResponse(){
         super("");
     }
 
-    public StatusResponse(String name, Integer status) {
+    public StatusResponse(String name, Boolean status) {
         super(name,status);
     }
 
@@ -53,13 +52,5 @@ public class StatusResponse extends ResponseInterface {
 
     public void setAttributes(Map<String, Object> attributes) {
         this.attributes = attributes;
-    }
-
-    public boolean isVmFound() {
-        return vmFound;
-    }
-
-    public void setVmFound(boolean vmFound) {
-        this.vmFound = vmFound;
     }
 }

@@ -9,7 +9,7 @@ public class DeleteService {
         DeleteRequestValidator requestValidator = new DeleteRequestValidator(request);
 
         if(!requestValidator.isRequestValid()){
-            return new DeleteResponse("",400,false);
+            return new DeleteResponse("",false);
         }
 
         String script = DeleteScriptGenerator.generateScript(request);
@@ -22,14 +22,14 @@ public class DeleteService {
             Process deleteKvm = processBuilder.start();
             deleteKvm.waitFor();
             Integer exitCode = deleteKvm.exitValue();
-            Integer statusCode = exitCode == 0 ? 200 : 400;
+            Boolean statusCode = exitCode == 0 ? true : false;
             Boolean deletionStatus =  exitCode == 0 ? true : false;
-            return new DeleteResponse(request.getName(),statusCode,deletionStatus);
+            return new DeleteResponse(request.getName(),deletionStatus);
         }
 
         catch(Exception exception){
             exception.printStackTrace();
-            return new DeleteResponse(request.getName(),400,false);
+            return new DeleteResponse(request.getName(),false);
 
         }
 

@@ -20,13 +20,13 @@ public class ListService {
             String output = IOUtils.toString(processBuilder.start().getInputStream());
 
             myVms = ListOutputParser.parse(output);
-            response = new ListResponse(myVms,200);
+            response = new ListResponse(myVms,true);
             return response;
         }
 
         catch(Exception exception){
             exception.printStackTrace();
-            return new ListResponse(new ArrayList<String>(),400);
+            return new ListResponse(new ArrayList<String>(),false);
 
         }
 

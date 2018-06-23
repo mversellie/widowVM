@@ -4,7 +4,7 @@ public class StatusExpectedResponseMother {
 
     public static String stringifiedCorrectResponse(){
         return "{\"name\":\"statusVm\"," +
-                "\"status\":200," +
+                "\"status\":true," +
                 "\"vmFound\":true," +
                 "\"attributes\": {" +
                         "\"memory\":500 ," +
@@ -19,8 +19,7 @@ public class StatusExpectedResponseMother {
         expectedResponse.setvCpus(1);
         expectedResponse.setName("statusVm");
         expectedResponse.setRunning(true);
-        expectedResponse.setVmFound(true);
-        expectedResponse.setStatus(200);
+        expectedResponse.setSuccess(true);
         return  expectedResponse;
     }
 

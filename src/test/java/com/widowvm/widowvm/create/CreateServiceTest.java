@@ -20,7 +20,7 @@ public class CreateServiceTest {
 
     @Test
     public void isVmCorrectlyCreated() {
-        CreateResponse correctResponse = new CreateResponse("createVm",200);
+        CreateResponse correctResponse = new CreateResponse("createVm",true);
         CreateRequest testRequestBeforeCreate = new CreateRequest("createVm",10,500,1);
         testRequestBeforeCreate.getAdditionalOptions().put("rootPassword","rootPassword!");
         testRequestBeforeCreate.getAdditionalOptions().put("encryptRootPassword",true);
@@ -31,12 +31,12 @@ public class CreateServiceTest {
 
         CreateResponse testResponse = createService.createVm(testRequestBeforeCreate);
         assertEquals(correctResponse.getName(),testResponse.getName());
-        assertEquals(correctResponse.getStatus(),testResponse.getStatus());
+        assertEquals(correctResponse.isSuccess(),testResponse.isSuccess());
 
 
         //should fail as after the
         CreateResponse testResponseAfterCreation = createService.createVm(testRequestBeforeCreate);
-        assertEquals(400,testResponseAfterCreation.getStatus().intValue());
+        assertEquals(false,testResponseAfterCreation.isSuccess());
     }
 
 

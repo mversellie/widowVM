@@ -29,7 +29,7 @@ public class StatusServiceTest {
         assertEquals(expectedResponse.getName(), testResponse.getName());
         assertEquals(expectedResponse.getvCpus(), testResponse.getvCpus());
         assertEquals(expectedResponse.isRunning(), testResponse.isRunning());
-        assertTrue(testResponse.isVmFound());
+        assertTrue(testResponse.isSuccess());
     }
 
     @Test
@@ -39,7 +39,6 @@ public class StatusServiceTest {
         testResponse = statusService.getVmStatus(badRequest);
         assertEquals(badRequest.getName(), testResponse.getName());
         assertEquals(0, testResponse.getAttributes().keySet().size());
-        assertEquals((Integer)400,testResponse.getStatus());
-        assertFalse(testResponse.isVmFound());
+        assertFalse(testResponse.isSuccess());
     }
 }
