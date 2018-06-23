@@ -58,8 +58,18 @@ task createTestVms {
 
 		exec {
 			ignoreExitValue = true
-			commandLine 'virt-install', '--name', 'deleteVm', '--ram', '500', '--disk',
-					'path=/var/lib/libvirt/images/deleteVm,size=10', '--vcpus', '1', '--os-type', 'linux',
+			commandLine 'virt-install', '--name', 'deleteVm1', '--ram', '500', '--disk',
+					'path=/var/lib/libvirt/images/deleteVm1,size=4', '--vcpus', '1', '--os-type', 'linux',
+					'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
+					'--console', 'pty,target_type=serial', '--location',
+					'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
+					'--extra-args', 'console=ttyS0'
+		}
+
+		exec {
+			ignoreExitValue = true
+			commandLine 'virt-install', '--name', 'deleteVm2', '--ram', '500', '--disk',
+					'path=/var/lib/libvirt/images/deleteVm2,size=4', '--vcpus', '1', '--os-type', 'linux',
 					'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
 					'--console', 'pty,target_type=serial', '--location',
 					'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
@@ -67,11 +77,10 @@ task createTestVms {
 		}
 
 
-
 		exec {
 			ignoreExitValue = true
 			commandLine 'virt-install', '--name', 'listVm1', '--ram', '500', '--disk',
-					'path=/var/lib/libvirt/images/listVm1,size=10', '--vcpus', '1', '--os-type', 'linux',
+					'path=/var/lib/libvirt/images/listVm1,size=4', '--vcpus', '1', '--os-type', 'linux',
 					'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
 					'--console', 'pty,target_type=serial', '--location',
 					'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
@@ -82,7 +91,7 @@ task createTestVms {
 		exec {
 			ignoreExitValue = true
 			commandLine 'virt-install', '--name', 'statusVm', '--ram', '500', '--disk',
-					'path=/var/lib/libvirt/images/statusVm,size=10', '--vcpus', '1', '--os-type', 'linux',
+					'path=/var/lib/libvirt/images/statusVm,size=4', '--vcpus', '1', '--os-type', 'linux',
 					'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
 					'--console', 'pty,target_type=serial', '--location',
 					'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
@@ -91,7 +100,13 @@ task createTestVms {
 	}
 }
 
-
+task deleteKickstart(type: Delete) {
+	def dirName = "kickstart"
+	file( dirName ).list().each{
+		f ->
+			delete "${dirName}/${f}"
+	}
+}
 
 task killAllVms(dependsOn : 'killTempVms'){
 	doLast {
@@ -128,13 +143,38 @@ task killTempVms{
 
 		exec {
 			ignoreExitValue = true
-			commandLine 'virsh', 'destroy', 'deleteVm'
+			commandLine 'virsh', 'destroy', 'deleteVm1'
 		}
 		exec {
 			ignoreExitValue = true
-			commandLine 'virsh', 'undefine', 'deleteVm'
+			commandLine 'virsh', 'undefine', 'deleteVm1'
+		}
+
+		exec {
+			ignoreExitValue = true
+			commandLine 'virsh', 'destroy', 'deleteVm2'
+		}
+		exec {
+			ignoreExitValue = true
+			commandLine 'virsh', 'undefine', 'deleteVm2'
+		}
+		exec {
+			ignoreExitValue = true
+			commandLine 'virsh', 'destroy', 'skjd'
+		}
+		exec {
+			ignoreExitValue = true
+			commandLine 'virsh', 'undefine', 'skjd'
 		}
 	}
+}
+
+clean << {
+    def dirName = "kickstart"
+    file( dirName ).list().each{
+        f ->
+            delete "${dirName}/${f}"
+    }
 }
 
 

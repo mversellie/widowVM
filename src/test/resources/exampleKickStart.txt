@@ -19,7 +19,6 @@ rootpw --disabled
 #Initial user (user with sudo capabilities)
 user --disabled
 
-#Reboot after installation
 reboot
 
 #Use text mode install

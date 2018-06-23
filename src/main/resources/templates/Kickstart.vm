@@ -18,8 +18,8 @@ rootpw $rootPassword
 rootpw --disabled
 #end
 
-#if($sudoUser && $sudoPassword)
-user $sudoUser --password $sudoPassword
+#if($sudoUser && $sudoPassword )
+user $sudoUser --password $sudoPassword --fullname $fullName
 #else
 user --disabled
 #end
