@@ -5,7 +5,7 @@ virt-install \
 --vcpus 1 \
 --os-type linux \
 --os-variant ubuntuprecise \
---network bridge=virbr0 \
+--network bridge=br1 \
 --graphics none \
 --console pty,target_type=serial \
 --location 'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/' \

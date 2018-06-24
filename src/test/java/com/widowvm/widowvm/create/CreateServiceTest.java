@@ -1,5 +1,7 @@
 package com.widowvm.widowvm.create;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,9 @@ public class CreateServiceTest {
     private CreateService createService;
 
     @Test
-    public void isVmCorrectlyCreated() {
+    public void isVmCorrectlyCreated() throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+
         CreateResponse correctResponse = new CreateResponse("createVm",true);
         CreateRequest testRequestBeforeCreate = new CreateRequest("createVm",10,512,1);
         testRequestBeforeCreate.getAdditionalOptions().put("rootPassword","rootPassword!");
@@ -27,6 +31,10 @@ public class CreateServiceTest {
         testRequestBeforeCreate.getAdditionalOptions().put("sudoUser","testuser");
         testRequestBeforeCreate.getAdditionalOptions().put("sudoPassword", "sudoPass");
         testRequestBeforeCreate.getAdditionalOptions().put("fullName","aFullName");
+
+
+       // mapper.writeValueAsString(testRequestBeforeCreate)
+        System.out.println(  mapper.writeValueAsString(testRequestBeforeCreate));
 
 
         CreateResponse testResponse = createService.createVm(testRequestBeforeCreate);
