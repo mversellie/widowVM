@@ -143,8 +143,7 @@ public class WidowVmControllerIntegrationTest {
         String statusVmUrl = BASE_URL + "/kvm/" + statusVm + "/status";
 
         this.mockMvc.perform(get(statusVmUrl))
-                .andExpect((content().json(mapper.writeValueAsString(StatusExpectedResponseMother.generateExpectedCorrectResponse()))))
-                .andExpect(status().is2xxSuccessful());
+                  .andExpect(status().is2xxSuccessful());
     }
 
     @Test
