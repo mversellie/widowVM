@@ -9,9 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CreateRequest extends RequestInterface {
-    private final Integer size;
-    private final Integer memory;
-    private final Integer vCpus;
+    private Integer size;
+    private Integer memory;
+    private Integer vCpus;
+    private String networkInterface;
     private Map<String,Object> additionalOptions;
 
     public CreateRequest(){
@@ -26,20 +27,23 @@ public class CreateRequest extends RequestInterface {
                          @JsonProperty("size") Integer size,
                          @JsonProperty("memory") Integer memory,
                          @JsonProperty("vCpus") Integer vCpus,
+                         @JsonProperty("networkInterface") String networkInterface,
                          @JsonProperty("additionalOptions") Map<String,Object> options) {
         super(name);
         this.size = size;
         this.memory = memory;
         this.vCpus = vCpus;
+        this.networkInterface = networkInterface;
         this.additionalOptions = options;
     }
 
-    public CreateRequest(String name, Integer size, Integer memory, Integer vCpus){
+    public CreateRequest(String name, Integer size, Integer memory, Integer vCpus, String networkInterface){
         super(name);
         this.size = size;
         this.memory = memory;
         this.vCpus = vCpus;
         this.additionalOptions = new HashMap();
+        this.networkInterface = networkInterface;
     }
 
 
@@ -69,5 +73,13 @@ public class CreateRequest extends RequestInterface {
 
     public boolean hasExtraOptions(){
         return !additionalOptions.isEmpty();
+    }
+
+    public String getNetworkInterface() {
+        return networkInterface;
+    }
+
+    public void setNetworkInterface(String networkInterface) {
+        this.networkInterface = networkInterface;
     }
 }

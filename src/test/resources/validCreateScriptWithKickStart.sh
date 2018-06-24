@@ -5,9 +5,9 @@ virt-install \
 --vcpus 1 \
 --os-type linux \
 --os-variant ubuntuprecise \
---network bridge=br1 \
+--network bridge=virbr0 \
 --graphics none \
 --location 'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/' \
 --initrd-inject='/directory/kickstart.ks' \
---extra-args "ks='file:/kickstart.ks' console=ttyS0" \
+--extra-args "ks=file:/kickstart.ks console=ttyS0" \
 --noreboot

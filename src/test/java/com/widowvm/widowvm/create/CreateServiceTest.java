@@ -25,7 +25,7 @@ public class CreateServiceTest {
         ObjectMapper mapper = new ObjectMapper();
 
         CreateResponse correctResponse = new CreateResponse("createVm",true);
-        CreateRequest testRequestBeforeCreate = new CreateRequest("createVm",10,512,1);
+        CreateRequest testRequestBeforeCreate = new CreateRequest("createVm",10,512,1,"virbr0");
         testRequestBeforeCreate.getAdditionalOptions().put("rootPassword","rootPassword!");
         testRequestBeforeCreate.getAdditionalOptions().put("encryptRootPassword",true);
         testRequestBeforeCreate.getAdditionalOptions().put("sudoUser","testuser");

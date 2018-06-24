@@ -5,7 +5,7 @@ virt-install \
 --vcpus $vCpus \
 --os-type linux \
 --os-variant ubuntuprecise \
---network bridge=br1 \
+--network bridge=$networkInterface \
 --graphics none \
 #if( !$ksPath )
 --console pty,target_type=serial \

@@ -31,7 +31,7 @@ public class KickStartFileFormatterTest {
     @Test
     public void IfNoAdditionalOptionsArePresentAreDefaultsPresent() throws IOException {
         //create testable output
-        CreateRequest requestWithNoOptions = new CreateRequest("name",10,512,1) ;
+        CreateRequest requestWithNoOptions = new CreateRequest("name",10,512,1,"virbr0") ;
         String actualKickstartContents = KickStartFileFormatter.formatRequest(requestWithNoOptions);
         kickStartLines = KickStartFileValueListParser.listKickStartContent(actualKickstartContents);
 
@@ -53,7 +53,7 @@ public class KickStartFileFormatterTest {
 
 
     private CreateRequest generateTestRequest(){
-        CreateRequest request = new CreateRequest("name",10,512,1) ;
+        CreateRequest request = new CreateRequest("name",10,512,1,"virbr0") ;
 
         request.getAdditionalOptions().put("rootPassword","rootPassword!");
         request.getAdditionalOptions().put("encryptRootPassword",true);

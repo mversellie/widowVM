@@ -75,7 +75,7 @@ public class WidowVmControllerIntegrationTest {
 
         CreateResponse expectedResponse = new CreateResponse(machineName,true);
 
-        CreateRequest testRequestBeforeCreate = new CreateRequest(machineName,5,512,1);
+        CreateRequest testRequestBeforeCreate = new CreateRequest(machineName,5,512,1,"virbr0");
         testRequestBeforeCreate.getAdditionalOptions().put("rootPassword","rootPassword!");
         testRequestBeforeCreate.getAdditionalOptions().put("encryptRootPassword",true);
         testRequestBeforeCreate.getAdditionalOptions().put("sudoUser","testuser");

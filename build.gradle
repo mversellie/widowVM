@@ -60,7 +60,7 @@ task createTestVms {
 			ignoreExitValue = true
 			commandLine 'virt-install', '--name', 'deleteVm1', '--ram', '512', '--disk',
 					'path=/var/lib/libvirt/images/deleteVm1,size=4', '--vcpus', '1', '--os-type', 'linux',
-					'--os-variant', 'ubuntuprecise', '--network', 'bridge=br1', '--graphics', 'none',
+					'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
 					'--console', 'pty,target_type=serial', '--location',
 					'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
 					'--extra-args', 'console=ttyS0'
@@ -70,7 +70,7 @@ task createTestVms {
 			ignoreExitValue = true
 			commandLine 'virt-install', '--name', 'deleteVm2', '--ram', '512', '--disk',
 					'path=/var/lib/libvirt/images/deleteVm2,size=4', '--vcpus', '1', '--os-type', 'linux',
-					'--os-variant', 'ubuntuprecise', '--network', 'bridge=br1', '--graphics', 'none',
+					'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
 					'--console', 'pty,target_type=serial', '--location',
 					'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
 					'--extra-args', 'console=ttyS0'
@@ -81,7 +81,7 @@ task createTestVms {
 			ignoreExitValue = true
 			commandLine 'virt-install', '--name', 'listVm1', '--ram', '512', '--disk',
 					'path=/var/lib/libvirt/images/listVm1,size=4', '--vcpus', '1', '--os-type', 'linux',
-					'--os-variant', 'ubuntuprecise', '--network', 'bridge=br1', '--graphics', 'none',
+					'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
 					'--console', 'pty,target_type=serial', '--location',
 					'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
 					'--extra-args', 'console=ttyS0'
@@ -92,7 +92,7 @@ task createTestVms {
 			ignoreExitValue = true
 			commandLine 'virt-install', '--name', 'statusVm', '--ram', '512', '--disk',
 					'path=/var/lib/libvirt/images/statusVm,size=4', '--vcpus', '1', '--os-type', 'linux',
-					'--os-variant', 'ubuntuprecise', '--network', 'bridge=br1', '--graphics', 'none',
+					'--os-variant', 'ubuntuprecise', '--network', 'bridge=virbr0', '--graphics', 'none',
 					'--console', 'pty,target_type=serial', '--location',
 					'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/',
 					'--extra-args', 'console=ttyS0'

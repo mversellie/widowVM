@@ -25,6 +25,7 @@ public class CreateScriptGenerator{
         velocityContext.put("memory",createRequest.getMemory());
         velocityContext.put("name",createRequest.getName());
         velocityContext.put("size",createRequest.getSize());
+        velocityContext.put("networkInterface",createRequest.getNetworkInterface());
 
         StringWriter output = new StringWriter();
 
@@ -45,9 +46,11 @@ public class CreateScriptGenerator{
         velocityContext.put("vCpus",createRequest.getvCpus());
         velocityContext.put("memory",createRequest.getMemory());
         velocityContext.put("name",createRequest.getName());
+        velocityContext.put("networkInterface",createRequest.getNetworkInterface());
         velocityContext.put("size",createRequest.getSize());
         velocityContext.put("ksPath",kickStartFilename);
         velocityContext.put("ksName", KickStartFileGenerator.getFilenameFromPath(kickStartFilename));
+
 
         StringWriter output = new StringWriter();
 

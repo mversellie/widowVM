@@ -45,7 +45,7 @@ public class WidowVmControllerTest {
     @Test
     public void createVmWithValidRequest() throws Exception {
         //arrange
-        CreateRequest createRequest = new CreateRequest("controllerCreateVmTest",6,512,1);
+        CreateRequest createRequest = new CreateRequest("controllerCreateVmTest",6,512,1,"virbr0");
         CreateResponse expectedResponseBody = new CreateResponse("controllerCreateVmTest",true);
 
         when(createService.createVm(any())).thenReturn(expectedResponseBody);
@@ -62,7 +62,7 @@ public class WidowVmControllerTest {
 
     @Test
     public void createVmWithInvalidRequest() throws Exception {
-        CreateRequest createRequest = new CreateRequest("",0,0,0);
+        CreateRequest createRequest = new CreateRequest("",0,0,0,"virbr0");
         CreateResponse expectedResponse = new CreateResponse("",false);
 
         when(createService.createVm(any())).thenReturn(expectedResponse);

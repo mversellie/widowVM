@@ -17,14 +17,14 @@ public class CreateScriptGeneratorTest {
 
     @Test
     public void doesGenerateScriptReturnAString() {
-        CreateRequest testRequest = new CreateRequest("createVm",20,34,2);
+        CreateRequest testRequest = new CreateRequest("createVm",20,34,2,"virbr0");
         assert(CreateScriptGenerator.generateScript(testRequest) instanceof String);
     }
 
     @Test
     public void doesGenerateScriptReturnCorrectCommandNoKickstart() throws IOException {
         String validScriptLocation = System.getProperty("user.dir") +"/src/test/resources/validCreateScriptNoKickStart.sh";
-        CreateRequest createRequest = new CreateRequest("createVm",20,2048,1);
+        CreateRequest createRequest = new CreateRequest("createVm",20,2048,1,"virbr0");
         String correctScript = new String (Files.readAllBytes(Paths.get(validScriptLocation)));
         assertEquals(correctScript,CreateScriptGenerator.generateScript(createRequest));
     }
@@ -32,7 +32,7 @@ public class CreateScriptGeneratorTest {
     @Test
     public void doesGenerateScriptReturnCorrectCommandWithKickstart() throws IOException {
             String validScriptLocation = System.getProperty("user.dir") +"/src/test/resources/validCreateScriptWithKickStart.sh";
-            CreateRequest createRequest = new CreateRequest("createVm",20,2048,1);
+            CreateRequest createRequest = new CreateRequest("createVm",20,2048,1,"virbr0");
             createRequest.getAdditionalOptions().put("rootPassword","rootPassword!");
             String correctScript = new String (Files.readAllBytes(Paths.get(validScriptLocation)));
             assertEquals(correctScript,CreateScriptGenerator.generateScript(createRequest,"/directory/kickstart.ks"));
