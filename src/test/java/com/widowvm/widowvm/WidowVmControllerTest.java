@@ -17,6 +17,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -44,17 +46,18 @@ public class WidowVmControllerTest {
     public void createVmWithValidRequest() throws Exception {
         //arrange
         CreateRequest createRequest = new CreateRequest("controllerCreateVmTest",6,512,1);
-        CreateResponse expectedResponse = new CreateResponse("controllerCreateVmTest",true);
+        CreateResponse expectedResponseBody = new CreateResponse("controllerCreateVmTest",true);
 
-        when(createService.createVm(any())).thenReturn(expectedResponse);
+        when(createService.createVm(any())).thenReturn(expectedResponseBody);
 
         //act
-        CreateResponse actualResponse = widowVmController.createVm(createRequest);
+        ResponseEntity<CreateResponse> actualResponse = widowVmController.createVm(createRequest);
 
         //assert
         verify(createService).createVm(any());
-        assert(actualResponse.getName()).equals(expectedResponse.getName());
-        assert(actualResponse.isSuccess() == expectedResponse.isSuccess());
+        assert(actualResponse.getBody().getName()).equals(expectedResponseBody.getName());
+        assert(actualResponse.getBody().isSuccess() == expectedResponseBody.isSuccess());
+        assert(actualResponse.getStatusCode().is2xxSuccessful());
     }
 
     @Test
@@ -65,12 +68,13 @@ public class WidowVmControllerTest {
         when(createService.createVm(any())).thenReturn(expectedResponse);
 
         //act
-        CreateResponse actualResponse = widowVmController.createVm(createRequest);
+        ResponseEntity<CreateResponse> actualResponse = widowVmController.createVm(createRequest);
 
         //assert
         verify(createService).createVm(any());
-        assert(actualResponse.getName()).equals(expectedResponse.getName());
-        assert(actualResponse.isSuccess() == expectedResponse.isSuccess());
+        assert(actualResponse.getBody().getName()).equals(expectedResponse.getName());
+        assert(actualResponse.getBody().isSuccess() == expectedResponse.isSuccess());
+        assert(actualResponse.getStatusCode().is4xxClientError());
 
     }
 
@@ -84,7 +88,8 @@ public class WidowVmControllerTest {
         when(statusService.getVmStatus(any())).thenReturn(expectedResponse);
 
         //act
-        StatusResponse actualResponse = widowVmController.getVmStatus(vmName);
+        ResponseEntity<StatusResponse> fullResponse = widowVmController.getVmStatus(vmName);
+        StatusResponse actualResponse = fullResponse.getBody();
 
         //assert
         verify(statusService).getVmStatus(any());
@@ -97,6 +102,7 @@ public class WidowVmControllerTest {
         Assert.assertEquals(expectedResponse.isRunning(),actualResponse.isRunning());
         Assert.assertEquals(expectedResponse.isSuccess(),actualResponse.isSuccess());
         Assert.assertEquals(expectedResponse.getName(),actualResponse.getName());
+        Assert.assertEquals(fullResponse.getStatusCode(), HttpStatus.OK);
 
 
     }
@@ -110,23 +116,15 @@ public class WidowVmControllerTest {
         when(deleteService.deleteVm(any())).thenReturn(expectedResponse);
 
         //act
-        DeleteResponse actualResponse = widowVmController.deleteVm(testRequest);
+        ResponseEntity<DeleteResponse> fullResponse = widowVmController.deleteVm(testRequest);
+        DeleteResponse actualResponse = fullResponse.getBody();
 
         //assert
         verify(deleteService).deleteVm(any());
         Assert.assertEquals(actualResponse.isSuccess(),expectedResponse.isSuccess());
         Assert.assertEquals(actualResponse.getName(),expectedResponse.getName());
+        Assert.assertEquals(fullResponse.getStatusCode(),HttpStatus.ACCEPTED);
     }
 
-/*
-    @Test
-    public void listVm() throws Exception{
-        ListResponse listResponse = ListExpectedResponseMother.expectedResponse();
-        given(widowVmController.listVms()).willReturn(listResponse);
-        mockMvc.perform(get("/kvm/list"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(content().json(ListExpectedResponseMother.expectedResponseAsString));
-    }
-  */
+
 }

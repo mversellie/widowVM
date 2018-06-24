@@ -6,6 +6,13 @@ public class ListResponse {
     private ArrayList<String> names;
     private boolean success =  true;
 
+    public ListResponse() {
+    }
+
+    public ListResponse(boolean success) {
+        this.success = success;
+    }
+
     public ListResponse(ArrayList<String> names){
         this.names = names;
     }

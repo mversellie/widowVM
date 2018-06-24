@@ -21,7 +21,7 @@ public class CreateServiceTest {
     @Test
     public void isVmCorrectlyCreated() {
         CreateResponse correctResponse = new CreateResponse("createVm",true);
-        CreateRequest testRequestBeforeCreate = new CreateRequest("createVm",10,500,1);
+        CreateRequest testRequestBeforeCreate = new CreateRequest("createVm",10,512,1);
         testRequestBeforeCreate.getAdditionalOptions().put("rootPassword","rootPassword!");
         testRequestBeforeCreate.getAdditionalOptions().put("encryptRootPassword",true);
         testRequestBeforeCreate.getAdditionalOptions().put("sudoUser","testuser");

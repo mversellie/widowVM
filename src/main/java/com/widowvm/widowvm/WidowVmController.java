@@ -1,4 +1,5 @@
 package com.widowvm.widowvm;
+
 import com.widowvm.widowvm.create.CreateRequest;
 import com.widowvm.widowvm.create.CreateResponse;
 import com.widowvm.widowvm.create.CreateService;
@@ -11,6 +12,8 @@ import com.widowvm.widowvm.status.StatusRequest;
 import com.widowvm.widowvm.status.StatusResponse;
 import com.widowvm.widowvm.status.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -30,18 +33,27 @@ public class WidowVmController {
     private ListService listService;
 
     @PostMapping("/kvm/create")
-    public CreateResponse createVm(@RequestBody CreateRequest createRequest){
-        return createService.createVm(createRequest);
+    public ResponseEntity<CreateResponse> createVm(@RequestBody CreateRequest createRequest){
+        CreateResponse responseBody = createService.createVm(createRequest);
+
+        return  new ResponseEntity<CreateResponse>(responseBody,
+                responseBody.isSuccess()? HttpStatus.CREATED : HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/kvm/{vmName}/status")
-    public StatusResponse getVmStatus(@PathVariable("vmName") String vmName){
-        return statusService.getVmStatus(new StatusRequest(vmName));
+    public ResponseEntity<StatusResponse> getVmStatus(@PathVariable("vmName") String vmName){
+        StatusResponse responseBody = statusService.getVmStatus(new StatusRequest(vmName));
+
+        return new ResponseEntity<StatusResponse>(responseBody,
+                responseBody.isSuccess() ? HttpStatus.OK: HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/kvm/delete")
-    public DeleteResponse deleteVm(@RequestBody DeleteRequest deleteRequest){
-        return deleteService.deleteVm(deleteRequest);
+    public ResponseEntity<DeleteResponse> deleteVm(@RequestBody DeleteRequest deleteRequest){
+        DeleteResponse responseBody = deleteService.deleteVm(deleteRequest);
+
+        return new ResponseEntity<DeleteResponse>(responseBody,
+                responseBody.isSuccess() ? HttpStatus.ACCEPTED: HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/kvm/list")

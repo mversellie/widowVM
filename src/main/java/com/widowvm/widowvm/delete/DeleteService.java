@@ -22,7 +22,6 @@ public class DeleteService {
             Process deleteKvm = processBuilder.start();
             deleteKvm.waitFor();
             Integer exitCode = deleteKvm.exitValue();
-            Boolean statusCode = exitCode == 0 ? true : false;
             Boolean deletionStatus =  exitCode == 0 ? true : false;
             return new DeleteResponse(request.getName(),deletionStatus);
         }

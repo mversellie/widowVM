@@ -5,8 +5,8 @@ OS Type:        hvm
 State:          running
 CPU(s):         1
 CPU time:       29.3s
-Max memory:     500000 KiB
-Used memory:    500000 KiB
+Max memory:     512000 KiB
+Used memory:    512000 KiB
 Persistent:     yes
 Autostart:      enable
 Managed save:   no

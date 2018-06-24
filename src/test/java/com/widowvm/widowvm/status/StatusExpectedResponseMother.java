@@ -7,7 +7,7 @@ public class StatusExpectedResponseMother {
                 "\"status\":true," +
                 "\"vmFound\":true," +
                 "\"attributes\": {" +
-                        "\"memory\":500 ," +
+                        "\"memory\":512 ," +
                         "\"isRunning\":true ," +
                         "\"vCpus\":1" +
                         "}}";
@@ -15,7 +15,7 @@ public class StatusExpectedResponseMother {
 
     public static StatusResponse generateExpectedCorrectResponse(){
         StatusResponse expectedResponse = new StatusResponse();
-        expectedResponse.setMemory(500);
+        expectedResponse.setMemory(512);
         expectedResponse.setvCpus(1);
         expectedResponse.setName("statusVm");
         expectedResponse.setRunning(true);
