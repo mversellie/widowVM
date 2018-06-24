@@ -9,5 +9,4 @@ virt-install \
 --graphics none \
 --location 'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/' \
 --initrd-inject='/directory/kickstart.ks' \
---extra-args "ks=file:/kickstart.ks console=ttyS0" \
---noreboot
+--extra-args "ks=file:/kickstart.ks console=ttyS0"

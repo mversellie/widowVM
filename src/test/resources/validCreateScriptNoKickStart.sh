@@ -9,5 +9,4 @@ virt-install \
 --graphics none \
 --console pty,target_type=serial \
 --location 'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/' \
---extra-args 'console=ttyS0' \
---noreboot
+--extra-args 'console=ttyS0'

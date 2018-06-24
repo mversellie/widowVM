@@ -27,7 +27,10 @@ public class KickStartExpectedListMother {
                 "network --bootproto=dhcp --device=eth0",
                 "firewall --disabled --trust=eth0 --ssh",
                 "skipx",
-                "preseed user-setup/allow-password-weak boolean true"
+                "preseed user-setup/allow-password-weak boolean true",
+                "%packages",
+                "@ ubuntu-server",
+                "openssh-server"
         };
 
         return  new ArrayList<String>(Arrays.asList(stringNotList));
@@ -56,7 +59,10 @@ public class KickStartExpectedListMother {
                 "network --bootproto=dhcp --device=eth0",
                 "firewall --disabled --trust=eth0 --ssh",
                 "skipx",
-                "preseed user-setup/allow-password-weak boolean true"
+                "preseed user-setup/allow-password-weak boolean true",
+                "%packages",
+                "@ ubuntu-server",
+                "openssh-server"
         };
 
         return  new ArrayList<String>(Arrays.asList(stringNotList));

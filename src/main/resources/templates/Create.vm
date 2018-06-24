@@ -13,8 +13,7 @@ virt-install \
 --location 'http://jp.archive.ubuntu.com/ubuntu/dists/precise/main/installer-amd64/' \
 #if( $ksPath && $ksName )
 --initrd-inject='$ksPath' \
---extra-args "ks=file:/$ksName console=ttyS0" \
+--extra-args "ks=file:/$ksName console=ttyS0"
 #else
---extra-args 'console=ttyS0' \
+--extra-args 'console=ttyS0'
 #end
---noreboot
