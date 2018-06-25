@@ -8,6 +8,7 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class KickStartFileFormatter {
@@ -24,7 +25,16 @@ public class KickStartFileFormatter {
         Map<String,Object> options = request.getAdditionalOptions();
 
             for (String key : options.keySet()) {
-                velocityContext.put(key, options.get(key).toString());
+                if(key == "packages"){
+                    ArrayList<String> packages = (ArrayList<String>) options.get(key);
+                    System.out.println("Memes:  " + packages.get(0));
+                    velocityContext.put(key, packages);
+                }
+
+                else {
+                    velocityContext.put(key, options.get(key).toString());
+
+                }
             }
 
 

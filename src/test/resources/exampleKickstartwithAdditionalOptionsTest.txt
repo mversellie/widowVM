@@ -8,21 +8,9 @@ mouse
 
 timezone America/New_York
 
-#if( $rootPassword )
-#if( $encryptRootPassword == "true")
-rootpw --iscrypted $rootPassword
-#else
-rootpw $rootPassword
-#end
-#else
 rootpw --disabled
-#end
 
-#if($sudoUser && $sudoPassword )
-user $sudoUser --password $sudoPassword --fullname $fullName
-#else
-user --disabled
-#end
+user testUser --password sudoPass --fullname aFullName
 
 reboot
 
@@ -52,10 +40,3 @@ skipx
 
 preseed user-setup/allow-password-weak boolean true
 
-#if( $packages )
-%packages
-#foreach( $package in $packages)
-$package
-#end
-%end
-#end

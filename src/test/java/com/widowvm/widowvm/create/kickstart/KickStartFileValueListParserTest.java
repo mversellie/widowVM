@@ -13,18 +13,20 @@ import static org.junit.Assert.*;
 public class KickStartFileValueListParserTest {
 
     ArrayList<String> actualKickStartList;
+    ArrayList<String> expectedKickStartList;
 
     @Before
     public void setUp() throws IOException {
         String kickStartExampleLocation = System.getProperty("user.dir") + "/src/test/resources/exampleKickStart.txt";
         String kickStartExampleText = new String(Files.readAllBytes(Paths.get(kickStartExampleLocation)));
         actualKickStartList = KickStartFileValueListParser.listKickStartContent(kickStartExampleText);
+        expectedKickStartList = KickStartExpectedListMother.generateExpectedDefaultList();
     }
 
     @Test
     public void doesMapperReturnValidNumberOfElements() {
         assertNotEquals(0, actualKickStartList.size());
-        assertEquals(25, actualKickStartList.size());
+        assertEquals(expectedKickStartList.size(), actualKickStartList.size());
     }
 
     @Test

@@ -5,22 +5,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class KickStartFileFormatterTest {
 
     CreateRequest request;
     String outputKickstartContents;
-    ArrayList<String> kickStartLines;
 
     @Before
     public void setUp() throws Exception {
         KickStartFileFormatter actualFormatter = new KickStartFileFormatter();
         request =  generateTestRequest();
         outputKickstartContents = KickStartFileFormatter.formatRequest(request);
-        kickStartLines = KickStartFileValueListParser.listKickStartContent(outputKickstartContents);
     }
 
     @Test
@@ -30,33 +31,57 @@ public class KickStartFileFormatterTest {
 
     @Test
     public void IfNoAdditionalOptionsArePresentAreDefaultsPresent() throws IOException {
-        //create testable output
+
+        //arrange
+        String kickStartExampleLocation = System.getProperty("user.dir") + "/src/test/resources/exampleKickstartForDefaultTest.txt";
+        String expectedKickstarterText = new String(Files.readAllBytes(Paths.get(kickStartExampleLocation)));
+
+
+        //act
         CreateRequest requestWithNoOptions = new CreateRequest("name",10,512,1,"virbr0") ;
         String actualKickstartContents = KickStartFileFormatter.formatRequest(requestWithNoOptions);
-        kickStartLines = KickStartFileValueListParser.listKickStartContent(actualKickstartContents);
 
-        //test
-        ArrayList<String> expectedKickStartList = KickStartExpectedListMother.generateExpectedDefaultList();
-        for(int i = 0; i <expectedKickStartList.size();i++){
-            assertEquals(expectedKickStartList.get(i), kickStartLines.get(i));
-        }
+
+        //assert
+        assertEquals(expectedKickstarterText,actualKickstartContents);
     }
 
     @Test
-    public void formatWithAdditionalOptions() {
-        ArrayList<String> expectedKickStartList = KickStartExpectedListMother.generateExpectedOptionsList();
+    public void formatWithAdditionalOptions() throws IOException {
+        //arrange
+        String kickStartExampleLocation = System.getProperty("user.dir") + "/src/test/resources/exampleKickstartwithAdditionalOptionsTest.txt";
+        String expectedKickstarterText = new String(Files.readAllBytes(Paths.get(kickStartExampleLocation)));
 
-        for(int i = 0; i <expectedKickStartList.size();i++){
-            assertEquals(expectedKickStartList.get(i), kickStartLines.get(i));
-        }
+        //act
+        String actualKickstartContents = KickStartFileFormatter.formatRequest(generateTestRequest());
+
+
+        //assert
+        assertEquals(expectedKickstarterText,actualKickstartContents);
     }
 
+    @Test
+    public void formatWithAdditionalSoftwarePackages() throws IOException {
+
+        //arrange
+        String kickStartExampleLocation = System.getProperty("user.dir") + "/src/test/resources/exampleKickstartWithAdditionalPackages.txt";
+        String expectedKickstarterText = new String(Files.readAllBytes(Paths.get(kickStartExampleLocation)));
+
+        CreateRequest request = generateTestRequest();
+        ArrayList<String> packages = new ArrayList<String>();
+        packages.add("openssh-server");
+        request.getAdditionalOptions().put("packages", packages);
+
+        //act
+        String actualKickstartContents = KickStartFileFormatter.formatRequest(request);
+
+
+        //assert
+        assertEquals(expectedKickstarterText,   actualKickstartContents);
+    }
 
     private CreateRequest generateTestRequest(){
         CreateRequest request = new CreateRequest("name",10,512,1,"virbr0") ;
-
-        request.getAdditionalOptions().put("rootPassword","rootPassword!");
-        request.getAdditionalOptions().put("encryptRootPassword",true);
         request.getAdditionalOptions().put("sudoUser","testUser");
         request.getAdditionalOptions().put("sudoPassword", "sudoPass");
         request.getAdditionalOptions().put("fullName","aFullName");

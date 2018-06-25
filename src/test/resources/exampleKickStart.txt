@@ -65,7 +65,3 @@ firewall --disabled --trust=eth0 --ssh
 skipx
 
 preseed user-setup/allow-password-weak boolean true
-
-%packages
-@ ubuntu-server
-openssh-server
