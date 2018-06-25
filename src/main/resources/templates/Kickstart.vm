@@ -57,5 +57,4 @@ preseed user-setup/allow-password-weak boolean true
 #foreach( $package in $packages)
 $package
 #end
-%end
 #end
