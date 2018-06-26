@@ -33,7 +33,6 @@ public class KickStartFileFormatter {
 
                 else {
                     velocityContext.put(key, options.get(key).toString());
-
                 }
             }
 

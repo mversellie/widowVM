@@ -32,7 +32,7 @@ part / --fstype ext4 --size 1 --grow --asprimary
 
 auth  --useshadow  --enablemd5
 
-network --bootproto=dhcp --device=eth0
+network --bootproto=dhcp --device=eth0 --hostname=vmName
 
 firewall --disabled --trust=eth0 --ssh
 

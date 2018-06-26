@@ -85,6 +85,7 @@ public class KickStartFileFormatterTest {
         request.getAdditionalOptions().put("sudoUser","testUser");
         request.getAdditionalOptions().put("sudoPassword", "sudoPass");
         request.getAdditionalOptions().put("fullName","aFullName");
+        request.getAdditionalOptions().put("hostname","vmName");
 
         return request;
     }

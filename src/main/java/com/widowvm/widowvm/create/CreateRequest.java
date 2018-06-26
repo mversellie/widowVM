@@ -20,6 +20,8 @@ public class CreateRequest extends RequestInterface {
         this.size = 0;
         this.memory = 0;
         this.vCpus = 0;
+        this.additionalOptions = new HashMap<>();
+        additionalOptions.put("hostname",name);
     }
 
     @JsonCreator
@@ -35,6 +37,9 @@ public class CreateRequest extends RequestInterface {
         this.vCpus = vCpus;
         this.networkInterface = networkInterface;
         this.additionalOptions = options;
+        if(!options.containsKey("hostname")){
+            this.additionalOptions.put("hostname",name);
+        }
     }
 
     public CreateRequest(String name, Integer size, Integer memory, Integer vCpus, String networkInterface){
@@ -43,6 +48,7 @@ public class CreateRequest extends RequestInterface {
         this.memory = memory;
         this.vCpus = vCpus;
         this.additionalOptions = new HashMap();
+        this.additionalOptions.put("hostname",name);
         this.networkInterface = networkInterface;
     }
 
