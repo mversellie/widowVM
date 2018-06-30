@@ -1,9 +1,9 @@
 package com.widowvm.widowvm.list;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ListResponse {
-    private ArrayList<String> names;
+    private List<String> names;
     private boolean success =  true;
 
     public ListResponse() {
@@ -13,20 +13,20 @@ public class ListResponse {
         this.success = success;
     }
 
-    public ListResponse(ArrayList<String> names){
+    public ListResponse(List<String> names){
         this.names = names;
     }
 
-    public ListResponse(ArrayList<String> names, Boolean success) {
+    public ListResponse(List<String> names, Boolean success) {
         this.names = names;
         this.success = success;
     }
 
-    public ArrayList<String> getNames() {
+    public List<String> getNames() {
         return names;
     }
 
-    public void setNames(ArrayList<String> names) {
+    public void setNames(List<String> names) {
         this.names = names;
     }
 

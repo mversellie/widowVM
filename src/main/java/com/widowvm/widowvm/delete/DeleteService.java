@@ -27,7 +27,6 @@ public class DeleteService {
         }
 
         catch(Exception exception){
-            exception.printStackTrace();
             return new DeleteResponse(request.getName(),false);
 
         }

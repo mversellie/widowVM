@@ -102,7 +102,7 @@ public class WidowVmControllerTest {
         Assert.assertEquals(expectedResponse.isRunning(),actualResponse.isRunning());
         Assert.assertEquals(expectedResponse.isSuccess(),actualResponse.isSuccess());
         Assert.assertEquals(expectedResponse.getName(),actualResponse.getName());
-        Assert.assertEquals(fullResponse.getStatusCode(), HttpStatus.OK);
+        Assert.assertEquals( HttpStatus.OK,fullResponse.getStatusCode());
 
 
     }
@@ -123,7 +123,7 @@ public class WidowVmControllerTest {
         verify(deleteService).deleteVm(any());
         Assert.assertEquals(actualResponse.isSuccess(),expectedResponse.isSuccess());
         Assert.assertEquals(actualResponse.getName(),expectedResponse.getName());
-        Assert.assertEquals(fullResponse.getStatusCode(),HttpStatus.ACCEPTED);
+        Assert.assertEquals(HttpStatus.ACCEPTED, fullResponse.getStatusCode());
     }
 
 

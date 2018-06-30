@@ -41,7 +41,6 @@ public class StatusService {
         }
 
         catch(Exception exception){
-            exception.printStackTrace();
             response = new StatusResponse(statusRequest.getName(),false);
             response.setSuccess(false);
             return response;

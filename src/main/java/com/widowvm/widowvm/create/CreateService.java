@@ -20,13 +20,8 @@ public class CreateService {
             String kickStartContents = KickStartFileFormatter.formatRequest(createRequest);
             String kickStartFileLocation = KickStartFileGenerator.generateKickStartFile(kickStartContents);
 
-            System.out.println("********************************************");
             script = CreateScriptGenerator.generateScript(createRequest, kickStartFileLocation);
-            System.out.println(script);
-            System.out.println("********************************************");
 
-            System.out.println(kickStartContents);
-            System.out.println("*********************************************");
         }
 
         else {
@@ -47,7 +42,6 @@ public class CreateService {
         }
 
         catch(Exception exception){
-            exception.printStackTrace();
             return new CreateResponse(createRequest.getName(),false);
         }
 

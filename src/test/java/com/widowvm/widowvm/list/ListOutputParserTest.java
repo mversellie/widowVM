@@ -2,16 +2,16 @@ package com.widowvm.widowvm.list;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ListOutputParserTest {
 
     @Test
     public void parseValidFile() throws Exception{
-        ArrayList<String> machines = ListOutputParser.parse(ListOutputMother.getAListOutput());
-        assertEquals(machines.size(),3);
+        List<String> machines = ListOutputParser.parse(ListOutputMother.getAListOutput());
+        assertEquals(3,machines.size());
     }
 
 }

@@ -4,12 +4,13 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ListService {
 
     public static ListResponse listVms(){
-        ArrayList<String> myVms;
+        List<String> myVms;
         ListResponse response;
 
         String script = "virsh list --name";
@@ -25,7 +26,6 @@ public class ListService {
         }
 
         catch(Exception exception){
-            exception.printStackTrace();
             return new ListResponse(new ArrayList<String>(),false);
 
         }

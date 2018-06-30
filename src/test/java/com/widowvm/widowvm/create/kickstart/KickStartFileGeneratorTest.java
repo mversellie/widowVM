@@ -32,6 +32,6 @@ public class KickStartFileGeneratorTest {
     @Test
     public void seeIfGetFilenameFromPathReturnsCorrectFilename() {
         String filepath = "/things/path/from/correctFilename.ks";
-        assertEquals(KickStartFileGenerator.getFilenameFromPath(filepath),"correctFilename.ks");
+        assertEquals("correctFilename.ks", KickStartFileGenerator.getFilenameFromPath(filepath));
     }
 }

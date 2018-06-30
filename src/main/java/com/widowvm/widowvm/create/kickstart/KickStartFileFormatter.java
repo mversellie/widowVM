@@ -27,7 +27,6 @@ public class KickStartFileFormatter {
             for (String key : options.keySet()) {
                 if(key == "packages"){
                     ArrayList<String> packages = (ArrayList<String>) options.get(key);
-                    System.out.println("Memes:  " + packages.get(0));
                     velocityContext.put(key, packages);
                 }
 

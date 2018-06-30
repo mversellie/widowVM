@@ -36,7 +36,7 @@ public class WidowVmController {
     public ResponseEntity<CreateResponse> createVm(@RequestBody CreateRequest createRequest){
         CreateResponse responseBody = createService.createVm(createRequest);
 
-        return  new ResponseEntity<CreateResponse>(responseBody,
+        return  new ResponseEntity<>(responseBody,
                 responseBody.isSuccess()? HttpStatus.CREATED : HttpStatus.BAD_REQUEST);
     }
 
@@ -44,7 +44,7 @@ public class WidowVmController {
     public ResponseEntity<StatusResponse> getVmStatus(@PathVariable("vmName") String vmName){
         StatusResponse responseBody = statusService.getVmStatus(new StatusRequest(vmName));
 
-        return new ResponseEntity<StatusResponse>(responseBody,
+        return new ResponseEntity<>(responseBody,
                 responseBody.isSuccess() ? HttpStatus.OK: HttpStatus.BAD_REQUEST);
     }
 
@@ -52,7 +52,7 @@ public class WidowVmController {
     public ResponseEntity<DeleteResponse> deleteVm(@RequestBody DeleteRequest deleteRequest){
         DeleteResponse responseBody = deleteService.deleteVm(deleteRequest);
 
-        return new ResponseEntity<DeleteResponse>(responseBody,
+        return new ResponseEntity<>(responseBody,
                 responseBody.isSuccess() ? HttpStatus.ACCEPTED: HttpStatus.BAD_REQUEST);
     }
 
