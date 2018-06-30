@@ -43,4 +43,28 @@ public class CreateRequestValidatorTest {
         CreateRequestValidator createRequestValidator = new CreateRequestValidator(createRequest);
         assertFalse(createRequestValidator.isRequestValid());
     }
+
+    @Test
+    public void verifyRequestIsInvalidIfUsernameIsNotLowerCase() {
+            CreateRequest createRequest = new CreateRequest("vmMachine",10,1000,1,"virbr0");
+            createRequest.getAdditionalOptions().put("sudoUser","aCaps");
+            CreateRequestValidator createRequestValidator = new CreateRequestValidator(createRequest);
+            assertFalse(createRequestValidator.isRequestValid());
+    }
+
+    @Test
+    public void verifyRequestIsInvalidIfUsernameHasSpaces() {
+        CreateRequest createRequest = new CreateRequest("vmMachine",10,1000,1,"virbr0");
+        createRequest.getAdditionalOptions().put("sudoUser","a space");
+        CreateRequestValidator createRequestValidator = new CreateRequestValidator(createRequest);
+        assertFalse(createRequestValidator.isRequestValid());
+    }
+
+    @Test
+    public void verifyRequestISInvalidIfUsernameIsLongerThan32Chars() {
+        CreateRequest createRequest = new CreateRequest("vmMachine",10,1000,1,"virbr0");
+        createRequest.getAdditionalOptions().put("sudoUser","888888888888888888888888888888888");
+        CreateRequestValidator createRequestValidator = new CreateRequestValidator(createRequest);
+        assertFalse(createRequestValidator.isRequestValid());
+    }
 }
